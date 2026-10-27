@@ -26,7 +26,7 @@ options
     tokenVocab = ADQLLexer;
 }
 
-import NonReservedKeywords;
+import ADQLNonRsvdKwds;
 
 adql
     : queryStatementExpression SEMICOLON

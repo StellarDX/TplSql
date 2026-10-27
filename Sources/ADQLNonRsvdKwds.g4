@@ -1,12 +1,12 @@
 /**
-    以下列表存放非保留关键字，可以作为表名或列名等，ADQL和TplSql均生效，添加方式如下：
+    以下列表存放ADQL的非保留关键字，可以作为表名或列名等，添加方式如下：
     (1) 在ADQLLexer.g4中添加一个词，如 KW_TRUE : 'TRUE';
     (2) 如果它是保留关键字（默认），后续最好写个测试看下兼容性是否能保持。
         如果它是非保留关键字，添加到以下列表即可生效
     如果你不确定是否可以添加，请参考以下文章：
     http://www.postgresql.org/docs/9.5/static/sql-keywords-appendix.html
 */
-parser grammar NonReservedKeywords;
+parser grammar ADQLNonRsvdKwds;
 
 options
 {
