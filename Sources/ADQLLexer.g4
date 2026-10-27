@@ -17,7 +17,8 @@
 
 lexer grammar ADQLLexer;
 
-options {
+options
+{
     caseInsensitive = true;
 }
 

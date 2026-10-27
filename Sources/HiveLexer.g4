@@ -22,7 +22,8 @@
 
 lexer grammar HiveLexer;
 
-options {
+options
+{
     caseInsensitive = true;
 }
 

@@ -28,6 +28,10 @@ options
 
 import NonReservedKeywords;
 
+adql
+    : queryStatementExpression SEMICOLON
+    ;
+
 // <query_specification> ::= [ <with_clause> ] <select_expression>
 queryStatementExpression
     // ADQL仅支持select语句，因此这个语法中把queryStatementExpression作为顶点，而TplSql将statement作为顶点
