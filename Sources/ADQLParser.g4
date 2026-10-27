@@ -19,6 +19,7 @@ parser grammar ADQLParser;
 
 // ADQL参考文献：https://ivoa.net/documents/ADQL/index.html
 // 本语法根据IVOA提供的BNF语法和Hive的语法整理
+// 测试用例可参考Simbad官方文档：https://cds.unistra.fr/help/documentation/simbad-more/adql-simbad/
 
 options
 {
