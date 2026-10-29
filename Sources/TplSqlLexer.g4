@@ -70,7 +70,7 @@ KW_POLYGON              : 'POLYGON';
 KW_REGION               : 'REGION';
 
 KW_COMPLEX              : 'COMPLEX';
-KW_QUATERNION           : 'QUAT' | 'QUATERNION';
+KW_QUATERNION           : 'QUAT' 'ERNION'?;
 KW_HYPERCOMPLEX         : 'HYPERCOMPLEX';
 
 StringLiteral: ( '\'' ( ~('\'' | '\\') | ('\\' .))* '\'')+;
