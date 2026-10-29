@@ -117,8 +117,6 @@ public:
 
     virtual std::any visitCastExpression(ADQLParser::CastExpressionContext *context) = 0;
 
-    virtual std::any visitPrimitiveType(ADQLParser::PrimitiveTypeContext *context) = 0;
-
     virtual std::any visitExtractExpression(ADQLParser::ExtractExpressionContext *context) = 0;
 
     virtual std::any visitTimeQualifiers(ADQLParser::TimeQualifiersContext *context) = 0;
@@ -284,6 +282,8 @@ public:
     virtual std::any visitLimitClause(ADQLParser::LimitClauseContext *context) = 0;
 
     virtual std::any visitNonReserved(ADQLParser::NonReservedContext *context) = 0;
+
+    virtual std::any visitAdqlPrimitiveType(ADQLParser::AdqlPrimitiveTypeContext *context) = 0;
 
 
 };

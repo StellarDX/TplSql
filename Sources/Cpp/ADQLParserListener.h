@@ -161,9 +161,6 @@ public:
   virtual void enterCastExpression(ADQLParser::CastExpressionContext *ctx) = 0;
   virtual void exitCastExpression(ADQLParser::CastExpressionContext *ctx) = 0;
 
-  virtual void enterPrimitiveType(ADQLParser::PrimitiveTypeContext *ctx) = 0;
-  virtual void exitPrimitiveType(ADQLParser::PrimitiveTypeContext *ctx) = 0;
-
   virtual void enterExtractExpression(ADQLParser::ExtractExpressionContext *ctx) = 0;
   virtual void exitExtractExpression(ADQLParser::ExtractExpressionContext *ctx) = 0;
 
@@ -412,6 +409,9 @@ public:
 
   virtual void enterNonReserved(ADQLParser::NonReservedContext *ctx) = 0;
   virtual void exitNonReserved(ADQLParser::NonReservedContext *ctx) = 0;
+
+  virtual void enterAdqlPrimitiveType(ADQLParser::AdqlPrimitiveTypeContext *ctx) = 0;
+  virtual void exitAdqlPrimitiveType(ADQLParser::AdqlPrimitiveTypeContext *ctx) = 0;
 
 
 };

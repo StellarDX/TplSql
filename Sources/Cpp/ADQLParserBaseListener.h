@@ -163,9 +163,6 @@ public:
   virtual void enterCastExpression(ADQLParser::CastExpressionContext * /*ctx*/) override { }
   virtual void exitCastExpression(ADQLParser::CastExpressionContext * /*ctx*/) override { }
 
-  virtual void enterPrimitiveType(ADQLParser::PrimitiveTypeContext * /*ctx*/) override { }
-  virtual void exitPrimitiveType(ADQLParser::PrimitiveTypeContext * /*ctx*/) override { }
-
   virtual void enterExtractExpression(ADQLParser::ExtractExpressionContext * /*ctx*/) override { }
   virtual void exitExtractExpression(ADQLParser::ExtractExpressionContext * /*ctx*/) override { }
 
@@ -414,6 +411,9 @@ public:
 
   virtual void enterNonReserved(ADQLParser::NonReservedContext * /*ctx*/) override { }
   virtual void exitNonReserved(ADQLParser::NonReservedContext * /*ctx*/) override { }
+
+  virtual void enterAdqlPrimitiveType(ADQLParser::AdqlPrimitiveTypeContext * /*ctx*/) override { }
+  virtual void exitAdqlPrimitiveType(ADQLParser::AdqlPrimitiveTypeContext * /*ctx*/) override { }
 
 
   virtual void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }

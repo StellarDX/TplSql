@@ -130,38 +130,37 @@ public:
     RuleTimestampLiteral = 40, RuleTimestampLocalTZLiteral = 41, RuleStringLiteralSequence = 42, 
     RuleCharSetStringLiteral = 43, RuleBooleanValue = 44, RulePrepareStmtParam = 45, 
     RuleParameterIdx = 46, RuleIntervalExpression = 47, RuleCastExpression = 48, 
-    RulePrimitiveType = 49, RuleExtractExpression = 50, RuleTimeQualifiers = 51, 
-    RuleFloorExpression = 52, RuleFloorDateQualifiers = 53, RuleCaseExpression = 54, 
-    RuleWhenExpression = 55, RuleSubQueryExpression = 56, RuleFunction_ = 57, 
-    RuleTrimFunction = 58, RuleFunctionName = 59, RuleFunctionIdentifier = 60, 
-    RuleSql11ReservedKeywordsUsedAsFunctionName = 61, RuleSelectExpression = 62, 
-    RuleOrderByClause = 63, RuleColumnRefOrder = 64, RuleOrderSpecificationRewrite = 65, 
-    RuleNullOrdering = 66, RuleNull_treatment = 67, RuleWindow_specification = 68, 
-    RulePartitioningSpec = 69, RulePartitionByClause = 70, RuleExpressions = 71, 
-    RuleExpressionsInParenthesis = 72, RuleExpressionsNotInParenthesis = 73, 
-    RuleExpressionOrDefault = 74, RuleDefaultValue = 75, RuleExpressionPart = 76, 
-    RuleDistributeByClause = 77, RuleSortByClause = 78, RuleColumnRefOrderInParenthesis = 79, 
-    RuleColumnRefOrderNotInParenthesis = 80, RuleClusterByClause = 81, RuleWindow_frame = 82, 
-    RuleWindow_range_expression = 83, RuleWindow_frame_start_boundary = 84, 
-    RuleWindow_frame_boundary = 85, RuleWindow_value_expression = 86, RuleTableOrColumn = 87, 
-    RulePrecedenceBitwiseXorOperator = 88, RulePrecedenceStarOperator = 89, 
-    RulePrecedencePlusOperator = 90, RulePrecedenceConcatenateOperator = 91, 
-    RulePrecedenceAmpersandOperator = 92, RulePrecedenceBitwiseOrOperator = 93, 
-    RulePrecedenceSimilarExpressionPart = 94, RulePrecedenceSimilarOperator = 95, 
-    RulePrecedenceRegexpOperator = 96, RulePrecedenceSimilarExpressionAtom = 97, 
-    RulePrecedenceSimilarExpressionQuantifierPredicate = 98, RuleSubQuerySelectorOperator = 99, 
-    RuleQuantifierType = 100, RulePrecedenceSimilarExpressionPartNot = 101, 
-    RulePrecedenceSimilarExpressionIn = 102, RulePrecedenceEqualOperator = 103, 
-    RulePrecedenceDistinctOperator = 104, RuleIsCondition = 105, RulePrecedenceAndOperator = 106, 
-    RulePrecedenceOrOperator = 107, RuleFromClause = 108, RuleFromSource = 109, 
-    RuleJoinSource = 110, RuleAtomjoinSource = 111, RuleTableSource = 112, 
-    RuleSubQuerySource = 113, RuleJoinToken = 114, RuleJoinSourcePart = 115, 
-    RuleColumnParenthesesList = 116, RuleColumnNameList = 117, RuleColumnName = 118, 
-    RuleWhereClause = 119, RuleSearchCondition = 120, RuleGroupByClause = 121, 
-    RuleGroupby_expression = 122, RuleRollupOldSyntax = 123, RuleGroupByEmpty = 124, 
-    RuleHavingClause = 125, RuleHavingCondition = 126, RuleWindow_clause = 127, 
-    RuleWindow_defn = 128, RuleSetOpSelectStatement = 129, RuleSetOperator = 130, 
-    RuleLimitClause = 131, RuleNonReserved = 132
+    RuleExtractExpression = 49, RuleTimeQualifiers = 50, RuleFloorExpression = 51, 
+    RuleFloorDateQualifiers = 52, RuleCaseExpression = 53, RuleWhenExpression = 54, 
+    RuleSubQueryExpression = 55, RuleFunction_ = 56, RuleTrimFunction = 57, 
+    RuleFunctionName = 58, RuleFunctionIdentifier = 59, RuleSql11ReservedKeywordsUsedAsFunctionName = 60, 
+    RuleSelectExpression = 61, RuleOrderByClause = 62, RuleColumnRefOrder = 63, 
+    RuleOrderSpecificationRewrite = 64, RuleNullOrdering = 65, RuleNull_treatment = 66, 
+    RuleWindow_specification = 67, RulePartitioningSpec = 68, RulePartitionByClause = 69, 
+    RuleExpressions = 70, RuleExpressionsInParenthesis = 71, RuleExpressionsNotInParenthesis = 72, 
+    RuleExpressionOrDefault = 73, RuleDefaultValue = 74, RuleExpressionPart = 75, 
+    RuleDistributeByClause = 76, RuleSortByClause = 77, RuleColumnRefOrderInParenthesis = 78, 
+    RuleColumnRefOrderNotInParenthesis = 79, RuleClusterByClause = 80, RuleWindow_frame = 81, 
+    RuleWindow_range_expression = 82, RuleWindow_frame_start_boundary = 83, 
+    RuleWindow_frame_boundary = 84, RuleWindow_value_expression = 85, RuleTableOrColumn = 86, 
+    RulePrecedenceBitwiseXorOperator = 87, RulePrecedenceStarOperator = 88, 
+    RulePrecedencePlusOperator = 89, RulePrecedenceConcatenateOperator = 90, 
+    RulePrecedenceAmpersandOperator = 91, RulePrecedenceBitwiseOrOperator = 92, 
+    RulePrecedenceSimilarExpressionPart = 93, RulePrecedenceSimilarOperator = 94, 
+    RulePrecedenceRegexpOperator = 95, RulePrecedenceSimilarExpressionAtom = 96, 
+    RulePrecedenceSimilarExpressionQuantifierPredicate = 97, RuleSubQuerySelectorOperator = 98, 
+    RuleQuantifierType = 99, RulePrecedenceSimilarExpressionPartNot = 100, 
+    RulePrecedenceSimilarExpressionIn = 101, RulePrecedenceEqualOperator = 102, 
+    RulePrecedenceDistinctOperator = 103, RuleIsCondition = 104, RulePrecedenceAndOperator = 105, 
+    RulePrecedenceOrOperator = 106, RuleFromClause = 107, RuleFromSource = 108, 
+    RuleJoinSource = 109, RuleAtomjoinSource = 110, RuleTableSource = 111, 
+    RuleSubQuerySource = 112, RuleJoinToken = 113, RuleJoinSourcePart = 114, 
+    RuleColumnParenthesesList = 115, RuleColumnNameList = 116, RuleColumnName = 117, 
+    RuleWhereClause = 118, RuleSearchCondition = 119, RuleGroupByClause = 120, 
+    RuleGroupby_expression = 121, RuleRollupOldSyntax = 122, RuleGroupByEmpty = 123, 
+    RuleHavingClause = 124, RuleHavingCondition = 125, RuleWindow_clause = 126, 
+    RuleWindow_defn = 127, RuleSetOpSelectStatement = 128, RuleSetOperator = 129, 
+    RuleLimitClause = 130, RuleNonReserved = 131, RuleAdqlPrimitiveType = 132
   };
 
   explicit ADQLParser(antlr4::TokenStream *input);
@@ -230,7 +229,6 @@ public:
   class ParameterIdxContext;
   class IntervalExpressionContext;
   class CastExpressionContext;
-  class PrimitiveTypeContext;
   class ExtractExpressionContext;
   class TimeQualifiersContext;
   class FloorExpressionContext;
@@ -313,7 +311,8 @@ public:
   class SetOpSelectStatementContext;
   class SetOperatorContext;
   class LimitClauseContext;
-  class NonReservedContext; 
+  class NonReservedContext;
+  class AdqlPrimitiveTypeContext; 
 
   class  AdqlContext : public antlr4::ParserRuleContext {
   public:
@@ -1202,7 +1201,7 @@ public:
 
   class  CastExpressionContext : public antlr4::ParserRuleContext {
   public:
-    ADQLParser::PrimitiveTypeContext *toType = nullptr;
+    ADQLParser::AdqlPrimitiveTypeContext *toType = nullptr;
     antlr4::Token *fmt = nullptr;
     CastExpressionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1211,7 +1210,7 @@ public:
     ExpressionContext *expression();
     antlr4::tree::TerminalNode *KW_AS();
     antlr4::tree::TerminalNode *RPAREN();
-    PrimitiveTypeContext *primitiveType();
+    AdqlPrimitiveTypeContext *adqlPrimitiveType();
     antlr4::tree::TerminalNode *StringLiteral();
     antlr4::tree::TerminalNode *KW_FORMAT();
 
@@ -1223,50 +1222,6 @@ public:
   };
 
   CastExpressionContext* castExpression();
-
-  class  PrimitiveTypeContext : public antlr4::ParserRuleContext {
-  public:
-    antlr4::Token *prec = nullptr;
-    antlr4::Token *scale = nullptr;
-    antlr4::Token *length = nullptr;
-    PrimitiveTypeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *KW_TINYINT();
-    antlr4::tree::TerminalNode *KW_SMALLINT();
-    antlr4::tree::TerminalNode *KW_INT();
-    antlr4::tree::TerminalNode *KW_BIGINT();
-    antlr4::tree::TerminalNode *KW_BOOLEAN();
-    antlr4::tree::TerminalNode *KW_FLOAT();
-    antlr4::tree::TerminalNode *KW_REAL();
-    antlr4::tree::TerminalNode *KW_DOUBLE();
-    antlr4::tree::TerminalNode *KW_PRECISION();
-    antlr4::tree::TerminalNode *KW_DATE();
-    antlr4::tree::TerminalNode *KW_DATETIME();
-    antlr4::tree::TerminalNode *KW_TIMESTAMP();
-    antlr4::tree::TerminalNode *KW_TIMESTAMPLOCALTZ();
-    antlr4::tree::TerminalNode *KW_WITH();
-    antlr4::tree::TerminalNode *KW_LOCAL();
-    antlr4::tree::TerminalNode *KW_TIME();
-    antlr4::tree::TerminalNode *KW_ZONE();
-    antlr4::tree::TerminalNode *KW_STRING();
-    antlr4::tree::TerminalNode *KW_BINARY();
-    antlr4::tree::TerminalNode *KW_DECIMAL();
-    antlr4::tree::TerminalNode *LPAREN();
-    antlr4::tree::TerminalNode *RPAREN();
-    std::vector<antlr4::tree::TerminalNode *> Number();
-    antlr4::tree::TerminalNode* Number(size_t i);
-    antlr4::tree::TerminalNode *COMMA();
-    antlr4::tree::TerminalNode *KW_VARCHAR();
-    antlr4::tree::TerminalNode *KW_CHAR();
-
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  PrimitiveTypeContext* primitiveType();
 
   class  ExtractExpressionContext : public antlr4::ParserRuleContext {
   public:
@@ -3034,6 +2989,50 @@ public:
   };
 
   NonReservedContext* nonReserved();
+
+  class  AdqlPrimitiveTypeContext : public antlr4::ParserRuleContext {
+  public:
+    antlr4::Token *prec = nullptr;
+    antlr4::Token *scale = nullptr;
+    antlr4::Token *length = nullptr;
+    AdqlPrimitiveTypeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *KW_TINYINT();
+    antlr4::tree::TerminalNode *KW_SMALLINT();
+    antlr4::tree::TerminalNode *KW_INT();
+    antlr4::tree::TerminalNode *KW_BIGINT();
+    antlr4::tree::TerminalNode *KW_BOOLEAN();
+    antlr4::tree::TerminalNode *KW_FLOAT();
+    antlr4::tree::TerminalNode *KW_REAL();
+    antlr4::tree::TerminalNode *KW_DOUBLE();
+    antlr4::tree::TerminalNode *KW_PRECISION();
+    antlr4::tree::TerminalNode *KW_DATE();
+    antlr4::tree::TerminalNode *KW_DATETIME();
+    antlr4::tree::TerminalNode *KW_TIMESTAMP();
+    antlr4::tree::TerminalNode *KW_TIMESTAMPLOCALTZ();
+    antlr4::tree::TerminalNode *KW_WITH();
+    antlr4::tree::TerminalNode *KW_LOCAL();
+    antlr4::tree::TerminalNode *KW_TIME();
+    antlr4::tree::TerminalNode *KW_ZONE();
+    antlr4::tree::TerminalNode *KW_STRING();
+    antlr4::tree::TerminalNode *KW_BINARY();
+    antlr4::tree::TerminalNode *KW_DECIMAL();
+    antlr4::tree::TerminalNode *LPAREN();
+    antlr4::tree::TerminalNode *RPAREN();
+    std::vector<antlr4::tree::TerminalNode *> Number();
+    antlr4::tree::TerminalNode* Number(size_t i);
+    antlr4::tree::TerminalNode *COMMA();
+    antlr4::tree::TerminalNode *KW_VARCHAR();
+    antlr4::tree::TerminalNode *KW_CHAR();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  AdqlPrimitiveTypeContext* adqlPrimitiveType();
 
 
   // By default the static state used to implement the parser is lazily initialized during the first

@@ -211,10 +211,6 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual std::any visitPrimitiveType(ADQLParser::PrimitiveTypeContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
   virtual std::any visitExtractExpression(ADQLParser::ExtractExpressionContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -544,6 +540,10 @@ public:
   }
 
   virtual std::any visitNonReserved(ADQLParser::NonReservedContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual std::any visitAdqlPrimitiveType(ADQLParser::AdqlPrimitiveTypeContext *ctx) override {
     return visitChildren(ctx);
   }
 
