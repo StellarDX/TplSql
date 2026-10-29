@@ -33,6 +33,7 @@ KW_TINYINT              : 'TINYINT' | 'INT8';
 KW_SMALLINT             : 'SMALLINT' | 'INT16';
 KW_INT                  : 'INT' 'EGER'? | 'INT32';
 KW_BIGINT               : 'BIGINT' | 'INT64';
+KW_INT128               : 'INT128';
 KW_INFTYINT             : 'INFTYINT';
 
 KW_FP4                  : 'FP4';
@@ -48,6 +49,7 @@ KW_FLOAT                : 'FLOAT' | 'FP32';
 KW_FP64                 : 'FP64';
 KW_FP80                 : 'FP80';
 KW_FP128                : 'QUADRUPLE' | 'FP128';
+KW_FP256                : 'OCTUPLE' | 'FP256';
 KW_INFTYFLOAT           : 'INFTYFLOAT';
 
 KW_DECIMAL32            : 'DECIMAL32';
@@ -66,6 +68,10 @@ KW_POINT                : 'POINT';
 KW_CIRCLE               : 'CIRCLE';
 KW_POLYGON              : 'POLYGON';
 KW_REGION               : 'REGION';
+
+KW_COMPLEX              : 'COMPLEX';
+KW_QUATERNION           : 'QUAT' | 'QUATERNION';
+KW_HYPERCOMPLEX         : 'HYPERCOMPLEX';
 
 StringLiteral: ( '\'' ( ~('\'' | '\\') | ('\\' .))* '\'')+;
 fragment QuotedIdentifier: '"' ( ~('"' | '\\') | ('\\' .))* '"';

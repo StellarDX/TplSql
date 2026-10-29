@@ -301,6 +301,9 @@ public:
   virtual void enterUnionType(TplSqlParser::UnionTypeContext * /*ctx*/) override { }
   virtual void exitUnionType(TplSqlParser::UnionTypeContext * /*ctx*/) override { }
 
+  virtual void enterComplexType(TplSqlParser::ComplexTypeContext * /*ctx*/) override { }
+  virtual void exitComplexType(TplSqlParser::ComplexTypeContext * /*ctx*/) override { }
+
   virtual void enterColTypeList(TplSqlParser::ColTypeListContext * /*ctx*/) override { }
   virtual void exitColTypeList(TplSqlParser::ColTypeListContext * /*ctx*/) override { }
 
@@ -1110,6 +1113,9 @@ public:
 
   virtual void enterTplsqlPrimitiveType(TplSqlParser::TplsqlPrimitiveTypeContext * /*ctx*/) override { }
   virtual void exitTplsqlPrimitiveType(TplSqlParser::TplsqlPrimitiveTypeContext * /*ctx*/) override { }
+
+  virtual void enterTplsqlNumericType(TplSqlParser::TplsqlNumericTypeContext * /*ctx*/) override { }
+  virtual void exitTplsqlNumericType(TplSqlParser::TplsqlNumericTypeContext * /*ctx*/) override { }
 
   virtual void enterAdql(TplSqlParser::AdqlContext * /*ctx*/) override { }
   virtual void exitAdql(TplSqlParser::AdqlContext * /*ctx*/) override { }

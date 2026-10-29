@@ -13,108 +13,109 @@ class  TplSqlParser : public antlr4::Parser {
 public:
   enum {
     KW_TOP = 1, KW_NATURAL = 2, KW_DLL = 3, KW_BIT = 4, KW_TINYINT = 5, 
-    KW_SMALLINT = 6, KW_INT = 7, KW_BIGINT = 8, KW_INFTYINT = 9, KW_FP4 = 10, 
-    KW_FP6E2M3 = 11, KW_FP6E3M2 = 12, KW_FP8E4M3 = 13, KW_FP8E5M2 = 14, 
-    KW_FP16 = 15, KW_BFP16 = 16, KW_TF19 = 17, KW_FLOAT = 18, KW_FP64 = 19, 
-    KW_FP80 = 20, KW_FP128 = 21, KW_INFTYFLOAT = 22, KW_DECIMAL32 = 23, 
-    KW_DECIMAL64 = 24, KW_DECIMAL = 25, KW_INFTYDECIMAL = 26, KW_VARBINARY = 27, 
-    KW_SEXAGESIMAL = 28, KW_CLOB = 29, KW_BLOB = 30, KW_POINT = 31, KW_CIRCLE = 32, 
-    KW_POLYGON = 33, KW_REGION = 34, StringLiteral = 35, KW_ABORT = 36, 
-    KW_ACTIVATE = 37, KW_ACTIVE = 38, KW_ADD = 39, KW_ADMIN = 40, KW_AFTER = 41, 
-    KW_ALL = 42, KW_ALLOC_FRACTION = 43, KW_ALTER = 44, KW_ANALYZE = 45, 
-    KW_AND = 46, KW_ANTI = 47, KW_ANY = 48, KW_APPLICATION = 49, KW_ARCHIVE = 50, 
-    KW_ARRAY = 51, KW_AS = 52, KW_ASC = 53, KW_AST = 54, KW_AT = 55, KW_AUTHORIZATION = 56, 
-    KW_AUTOCOMMIT = 57, KW_BATCH = 58, KW_BEFORE = 59, KW_BETWEEN = 60, 
-    KW_BINARY = 61, KW_BOOLEAN = 62, KW_BOTH = 63, KW_BUCKET = 64, KW_BUCKETS = 65, 
-    KW_BY = 66, KW_CACHE = 67, KW_CASCADE = 68, KW_CASE = 69, KW_CAST = 70, 
-    KW_CBO = 71, KW_CHANGE = 72, KW_CHAR = 73, KW_CHECK = 74, KW_CLUSTER = 75, 
-    KW_CLUSTERED = 76, KW_CLUSTERSTATUS = 77, KW_COLLECTION = 78, KW_COLUMN = 79, 
-    KW_COLUMNS = 80, KW_COMMENT = 81, KW_COMMIT = 82, KW_COMPACT = 83, KW_COMPACTIONS = 84, 
-    KW_COMPACT_ID = 85, KW_COMPUTE = 86, KW_CONCATENATE = 87, KW_CONF = 88, 
-    KW_CONSTRAINT = 89, KW_CONTINUE = 90, KW_COST = 91, KW_CREATE = 92, 
-    KW_CRON = 93, KW_CROSS = 94, KW_CUBE = 95, KW_CURRENT = 96, KW_CURRENT_DATE = 97, 
-    KW_CURRENT_TIMESTAMP = 98, KW_CURSOR = 99, KW_DATA = 100, KW_DATABASE = 101, 
-    KW_DATABASES = 102, KW_DATACONNECTOR = 103, KW_DATACONNECTORS = 104, 
-    KW_DATE = 105, KW_DATETIME = 106, KW_DAY = 107, KW_DAYOFWEEK = 108, 
-    KW_DBPROPERTIES = 109, KW_DCPROPERTIES = 110, KW_DDL = 111, KW_DEBUG = 112, 
-    KW_DEFAULT = 113, KW_DEFERRED = 114, KW_DEFINED = 115, KW_DELETE = 116, 
-    KW_DELIMITED = 117, KW_DEPENDENCY = 118, KW_DESC = 119, KW_DESCRIBE = 120, 
-    KW_DETAIL = 121, KW_DIRECTORIES = 122, KW_DIRECTORY = 123, KW_DISABLE = 124, 
-    KW_DISTINCT = 125, KW_DISTRIBUTE = 126, KW_DISTRIBUTED = 127, KW_DO = 128, 
-    KW_DOUBLE = 129, KW_DOW = 130, KW_DROP = 131, KW_DUMP = 132, KW_ELEM_TYPE = 133, 
-    KW_ELSE = 134, KW_ENABLE = 135, KW_END = 136, KW_ENFORCED = 137, KW_ESCAPED = 138, 
-    KW_EVERY = 139, KW_EXCEPT = 140, KW_EXCHANGE = 141, KW_EXCLUSIVE = 142, 
-    KW_EXECUTE = 143, KW_EXECUTED = 144, KW_EXISTS = 145, KW_EXPIRE_SNAPSHOTS = 146, 
-    KW_EXPLAIN = 147, KW_EXPORT = 148, KW_EXPRESSION = 149, KW_EXTENDED = 150, 
-    KW_EXTERNAL = 151, KW_EXTRACT = 152, KW_FALSE = 153, KW_FETCH = 154, 
-    KW_FIELDS = 155, KW_FILE = 156, KW_FILEFORMAT = 157, KW_FIRST = 158, 
-    KW_FLOOR = 159, KW_FOLLOWING = 160, KW_FOR = 161, KW_FORCE = 162, KW_FOREIGN = 163, 
-    KW_FORMAT = 164, KW_FORMATTED = 165, KW_FROM = 166, KW_FULL = 167, KW_FUNCTION = 168, 
-    KW_FUNCTIONS = 169, KW_GRANT = 170, KW_GROUP = 171, KW_GROUPING = 172, 
-    KW_HAVING = 173, KW_HOLD_DDLTIME = 174, KW_HOUR = 175, KW_IDXPROPERTIES = 176, 
-    KW_IF = 177, KW_IGNORE = 178, KW_IMPORT = 179, KW_IN = 180, KW_INDEX = 181, 
-    KW_INDEXES = 182, KW_INNER = 183, KW_INPATH = 184, KW_INPUTDRIVER = 185, 
-    KW_INPUTFORMAT = 186, KW_INSERT = 187, KW_INTERSECT = 188, KW_INTERVAL = 189, 
-    KW_INTO = 190, KW_IS = 191, KW_ISOLATION = 192, KW_ITEMS = 193, KW_JAR = 194, 
-    KW_JOIN = 195, KW_JOINCOST = 196, KW_KEY = 197, KW_KEYS = 198, KW_KEY_TYPE = 199, 
-    KW_KILL = 200, KW_LAST = 201, KW_LATERAL = 202, KW_LEADING = 203, KW_LEFT = 204, 
-    KW_LESS = 205, KW_LEVEL = 206, KW_LIKE = 207, KW_LIMIT = 208, KW_LINES = 209, 
-    KW_LOAD = 210, KW_LOCAL = 211, KW_LOCATION = 212, KW_LOCK = 213, KW_LOCKS = 214, 
-    KW_LOGICAL = 215, KW_LONG = 216, KW_MACRO = 217, KW_MANAGED = 218, KW_MANAGEDLOCATION = 219, 
-    KW_MANAGEMENT = 220, KW_MAP = 221, KW_MAPJOIN = 222, KW_MAPPING = 223, 
-    KW_MATCHED = 224, KW_MATERIALIZED = 225, KW_MERGE = 226, KW_METADATA = 227, 
-    KW_MINUS = 228, KW_MINUTE = 229, KW_MONTH = 230, KW_MORE = 231, KW_MOVE = 232, 
-    KW_MSCK = 233, KW_NONE = 234, KW_NORELY = 235, KW_NOSCAN = 236, KW_NOT = 237, 
-    KW_NOVALIDATE = 238, KW_NO_DROP = 239, KW_NULL = 240, KW_NULLS = 241, 
-    KW_OF = 242, KW_OFFLINE = 243, KW_OFFSET = 244, KW_ON = 245, KW_ONLY = 246, 
-    KW_OPERATOR = 247, KW_OPTION = 248, KW_OR = 249, KW_ORDER = 250, KW_OUT = 251, 
-    KW_OUTER = 252, KW_OUTPUTDRIVER = 253, KW_OUTPUTFORMAT = 254, KW_OVER = 255, 
-    KW_OVERWRITE = 256, KW_OWNER = 257, KW_PARTITION = 258, KW_PARTITIONED = 259, 
-    KW_PARTITIONS = 260, KW_PATH = 261, KW_PERCENT = 262, KW_PKFK_JOIN = 263, 
-    KW_PLAN = 264, KW_PLANS = 265, KW_PLUS = 266, KW_POOL = 267, KW_PRECEDING = 268, 
-    KW_PRECISION = 269, KW_PREPARE = 270, KW_PRESERVE = 271, KW_PRIMARY = 272, 
-    KW_PRINCIPALS = 273, KW_PROCEDURE = 274, KW_PROTECTION = 275, KW_PURGE = 276, 
-    KW_QUALIFY = 277, KW_QUARTER = 278, KW_QUERY = 279, KW_QUERY_PARALLELISM = 280, 
-    KW_RANGE = 281, KW_READ = 282, KW_READONLY = 283, KW_READS = 284, KW_REAL = 285, 
-    KW_REBUILD = 286, KW_RECORDREADER = 287, KW_RECORDWRITER = 288, KW_REDUCE = 289, 
-    KW_REFERENCES = 290, KW_REGEXP = 291, KW_RELOAD = 292, KW_RELY = 293, 
-    KW_REMOTE = 294, KW_RENAME = 295, KW_REOPTIMIZATION = 296, KW_REPAIR = 297, 
-    KW_REPL = 298, KW_REPLACE = 299, KW_REPLICATION = 300, KW_RESOURCE = 301, 
-    KW_RESPECT = 302, KW_RESTRICT = 303, KW_REVOKE = 304, KW_REWRITE = 305, 
-    KW_RIGHT = 306, KW_RLIKE = 307, KW_ROLE = 308, KW_ROLES = 309, KW_ROLLBACK = 310, 
-    KW_ROLLUP = 311, KW_ROW = 312, KW_ROWS = 313, KW_SCHEDULED = 314, KW_SCHEDULING_POLICY = 315, 
-    KW_SCHEMA = 316, KW_SCHEMAS = 317, KW_SECOND = 318, KW_SELECT = 319, 
-    KW_SEMI = 320, KW_SERDE = 321, KW_SERDEPROPERTIES = 322, KW_SERVER = 323, 
-    KW_SET = 324, KW_SETS = 325, KW_SET_CURRENT_SNAPSHOT = 326, KW_SHARED = 327, 
-    KW_SHOW = 328, KW_SHOW_DATABASE = 329, KW_SKEWED = 330, KW_SNAPSHOT = 331, 
-    KW_SOME = 332, KW_SORT = 333, KW_SORTED = 334, KW_SPEC = 335, KW_SSL = 336, 
-    KW_START = 337, KW_STATISTICS = 338, KW_STATUS = 339, KW_STORED = 340, 
-    KW_STREAMTABLE = 341, KW_STRING = 342, KW_STRUCT = 343, KW_SUMMARY = 344, 
-    KW_SYNC = 345, KW_SYSTEM_TIME = 346, KW_SYSTEM_VERSION = 347, KW_TABLE = 348, 
-    KW_TABLES = 349, KW_TABLESAMPLE = 350, KW_TBLPROPERTIES = 351, KW_TEMPORARY = 352, 
-    KW_TERMINATED = 353, KW_THEN = 354, KW_TIME = 355, KW_TIMESTAMP = 356, 
-    KW_TIMESTAMPLOCALTZ = 357, KW_TIMESTAMPTZ = 358, KW_TO = 359, KW_TOUCH = 360, 
-    KW_TRAILING = 361, KW_TRANSACTION = 362, KW_TRANSACTIONAL = 363, KW_TRANSACTIONS = 364, 
-    KW_TRANSFORM = 365, KW_TRIGGER = 366, KW_TRIM = 367, KW_TRUE = 368, 
-    KW_TRUNCATE = 369, KW_TYPE = 370, KW_UNARCHIVE = 371, KW_UNBOUNDED = 372, 
-    KW_UNDO = 373, KW_UNION = 374, KW_UNIONTYPE = 375, KW_UNIQUE = 376, 
-    KW_UNIQUEJOIN = 377, KW_UNKNOWN = 378, KW_UNLOCK = 379, KW_UNMANAGED = 380, 
-    KW_UNSET = 381, KW_UNSIGNED = 382, KW_UPDATE = 383, KW_URI = 384, KW_URL = 385, 
-    KW_USE = 386, KW_USER = 387, KW_USING = 388, KW_UTC = 389, KW_UTCTIMESTAMP = 390, 
-    KW_VALIDATE = 391, KW_VALUES = 392, KW_VALUE_TYPE = 393, KW_VARCHAR = 394, 
-    KW_VECTORIZATION = 395, KW_VIEW = 396, KW_VIEWS = 397, KW_WAIT = 398, 
-    KW_WEEK = 399, KW_WHEN = 400, KW_WHERE = 401, KW_WHILE = 402, KW_WINDOW = 403, 
-    KW_WITH = 404, KW_WITHIN = 405, KW_WORK = 406, KW_WORKLOAD = 407, KW_WRITE = 408, 
-    KW_YEAR = 409, KW_ZONE = 410, DOT = 411, COLON = 412, COMMA = 413, SEMICOLON = 414, 
-    LPAREN = 415, RPAREN = 416, LSQUARE = 417, RSQUARE = 418, LCURLY = 419, 
-    RCURLY = 420, EQUAL = 421, EQUAL_NS = 422, NOTEQUAL = 423, LESSTHANOREQUALTO = 424, 
-    LESSTHAN = 425, GREATERTHANOREQUALTO = 426, GREATERTHAN = 427, DIVIDE = 428, 
-    PLUS = 429, MINUS = 430, STAR = 431, MOD = 432, DIV = 433, AMPERSAND = 434, 
-    TILDE = 435, BITWISEOR = 436, CONCATENATE = 437, BITWISEXOR = 438, QUESTION = 439, 
-    DOLLAR = 440, CharSetLiteral = 441, IntegralLiteral = 442, NumberLiteral = 443, 
-    ByteLengthLiteral = 444, Number = 445, Identifier = 446, CharSetName = 447, 
-    WHITE_SPACE = 448, LINE_COMMENT = 449, QUERY_HINT = 450, SHOW_HINT = 451, 
-    HIDDEN_HINT = 452
+    KW_SMALLINT = 6, KW_INT = 7, KW_BIGINT = 8, KW_INT128 = 9, KW_INFTYINT = 10, 
+    KW_FP4 = 11, KW_FP6E2M3 = 12, KW_FP6E3M2 = 13, KW_FP8E4M3 = 14, KW_FP8E5M2 = 15, 
+    KW_FP16 = 16, KW_BFP16 = 17, KW_TF19 = 18, KW_FLOAT = 19, KW_FP64 = 20, 
+    KW_FP80 = 21, KW_FP128 = 22, KW_FP256 = 23, KW_INFTYFLOAT = 24, KW_DECIMAL32 = 25, 
+    KW_DECIMAL64 = 26, KW_DECIMAL = 27, KW_INFTYDECIMAL = 28, KW_VARBINARY = 29, 
+    KW_SEXAGESIMAL = 30, KW_CLOB = 31, KW_BLOB = 32, KW_POINT = 33, KW_CIRCLE = 34, 
+    KW_POLYGON = 35, KW_REGION = 36, KW_COMPLEX = 37, KW_QUATERNION = 38, 
+    KW_HYPERCOMPLEX = 39, StringLiteral = 40, KW_ABORT = 41, KW_ACTIVATE = 42, 
+    KW_ACTIVE = 43, KW_ADD = 44, KW_ADMIN = 45, KW_AFTER = 46, KW_ALL = 47, 
+    KW_ALLOC_FRACTION = 48, KW_ALTER = 49, KW_ANALYZE = 50, KW_AND = 51, 
+    KW_ANTI = 52, KW_ANY = 53, KW_APPLICATION = 54, KW_ARCHIVE = 55, KW_ARRAY = 56, 
+    KW_AS = 57, KW_ASC = 58, KW_AST = 59, KW_AT = 60, KW_AUTHORIZATION = 61, 
+    KW_AUTOCOMMIT = 62, KW_BATCH = 63, KW_BEFORE = 64, KW_BETWEEN = 65, 
+    KW_BINARY = 66, KW_BOOLEAN = 67, KW_BOTH = 68, KW_BUCKET = 69, KW_BUCKETS = 70, 
+    KW_BY = 71, KW_CACHE = 72, KW_CASCADE = 73, KW_CASE = 74, KW_CAST = 75, 
+    KW_CBO = 76, KW_CHANGE = 77, KW_CHAR = 78, KW_CHECK = 79, KW_CLUSTER = 80, 
+    KW_CLUSTERED = 81, KW_CLUSTERSTATUS = 82, KW_COLLECTION = 83, KW_COLUMN = 84, 
+    KW_COLUMNS = 85, KW_COMMENT = 86, KW_COMMIT = 87, KW_COMPACT = 88, KW_COMPACTIONS = 89, 
+    KW_COMPACT_ID = 90, KW_COMPUTE = 91, KW_CONCATENATE = 92, KW_CONF = 93, 
+    KW_CONSTRAINT = 94, KW_CONTINUE = 95, KW_COST = 96, KW_CREATE = 97, 
+    KW_CRON = 98, KW_CROSS = 99, KW_CUBE = 100, KW_CURRENT = 101, KW_CURRENT_DATE = 102, 
+    KW_CURRENT_TIMESTAMP = 103, KW_CURSOR = 104, KW_DATA = 105, KW_DATABASE = 106, 
+    KW_DATABASES = 107, KW_DATACONNECTOR = 108, KW_DATACONNECTORS = 109, 
+    KW_DATE = 110, KW_DATETIME = 111, KW_DAY = 112, KW_DAYOFWEEK = 113, 
+    KW_DBPROPERTIES = 114, KW_DCPROPERTIES = 115, KW_DDL = 116, KW_DEBUG = 117, 
+    KW_DEFAULT = 118, KW_DEFERRED = 119, KW_DEFINED = 120, KW_DELETE = 121, 
+    KW_DELIMITED = 122, KW_DEPENDENCY = 123, KW_DESC = 124, KW_DESCRIBE = 125, 
+    KW_DETAIL = 126, KW_DIRECTORIES = 127, KW_DIRECTORY = 128, KW_DISABLE = 129, 
+    KW_DISTINCT = 130, KW_DISTRIBUTE = 131, KW_DISTRIBUTED = 132, KW_DO = 133, 
+    KW_DOUBLE = 134, KW_DOW = 135, KW_DROP = 136, KW_DUMP = 137, KW_ELEM_TYPE = 138, 
+    KW_ELSE = 139, KW_ENABLE = 140, KW_END = 141, KW_ENFORCED = 142, KW_ESCAPED = 143, 
+    KW_EVERY = 144, KW_EXCEPT = 145, KW_EXCHANGE = 146, KW_EXCLUSIVE = 147, 
+    KW_EXECUTE = 148, KW_EXECUTED = 149, KW_EXISTS = 150, KW_EXPIRE_SNAPSHOTS = 151, 
+    KW_EXPLAIN = 152, KW_EXPORT = 153, KW_EXPRESSION = 154, KW_EXTENDED = 155, 
+    KW_EXTERNAL = 156, KW_EXTRACT = 157, KW_FALSE = 158, KW_FETCH = 159, 
+    KW_FIELDS = 160, KW_FILE = 161, KW_FILEFORMAT = 162, KW_FIRST = 163, 
+    KW_FLOOR = 164, KW_FOLLOWING = 165, KW_FOR = 166, KW_FORCE = 167, KW_FOREIGN = 168, 
+    KW_FORMAT = 169, KW_FORMATTED = 170, KW_FROM = 171, KW_FULL = 172, KW_FUNCTION = 173, 
+    KW_FUNCTIONS = 174, KW_GRANT = 175, KW_GROUP = 176, KW_GROUPING = 177, 
+    KW_HAVING = 178, KW_HOLD_DDLTIME = 179, KW_HOUR = 180, KW_IDXPROPERTIES = 181, 
+    KW_IF = 182, KW_IGNORE = 183, KW_IMPORT = 184, KW_IN = 185, KW_INDEX = 186, 
+    KW_INDEXES = 187, KW_INNER = 188, KW_INPATH = 189, KW_INPUTDRIVER = 190, 
+    KW_INPUTFORMAT = 191, KW_INSERT = 192, KW_INTERSECT = 193, KW_INTERVAL = 194, 
+    KW_INTO = 195, KW_IS = 196, KW_ISOLATION = 197, KW_ITEMS = 198, KW_JAR = 199, 
+    KW_JOIN = 200, KW_JOINCOST = 201, KW_KEY = 202, KW_KEYS = 203, KW_KEY_TYPE = 204, 
+    KW_KILL = 205, KW_LAST = 206, KW_LATERAL = 207, KW_LEADING = 208, KW_LEFT = 209, 
+    KW_LESS = 210, KW_LEVEL = 211, KW_LIKE = 212, KW_LIMIT = 213, KW_LINES = 214, 
+    KW_LOAD = 215, KW_LOCAL = 216, KW_LOCATION = 217, KW_LOCK = 218, KW_LOCKS = 219, 
+    KW_LOGICAL = 220, KW_LONG = 221, KW_MACRO = 222, KW_MANAGED = 223, KW_MANAGEDLOCATION = 224, 
+    KW_MANAGEMENT = 225, KW_MAP = 226, KW_MAPJOIN = 227, KW_MAPPING = 228, 
+    KW_MATCHED = 229, KW_MATERIALIZED = 230, KW_MERGE = 231, KW_METADATA = 232, 
+    KW_MINUS = 233, KW_MINUTE = 234, KW_MONTH = 235, KW_MORE = 236, KW_MOVE = 237, 
+    KW_MSCK = 238, KW_NONE = 239, KW_NORELY = 240, KW_NOSCAN = 241, KW_NOT = 242, 
+    KW_NOVALIDATE = 243, KW_NO_DROP = 244, KW_NULL = 245, KW_NULLS = 246, 
+    KW_OF = 247, KW_OFFLINE = 248, KW_OFFSET = 249, KW_ON = 250, KW_ONLY = 251, 
+    KW_OPERATOR = 252, KW_OPTION = 253, KW_OR = 254, KW_ORDER = 255, KW_OUT = 256, 
+    KW_OUTER = 257, KW_OUTPUTDRIVER = 258, KW_OUTPUTFORMAT = 259, KW_OVER = 260, 
+    KW_OVERWRITE = 261, KW_OWNER = 262, KW_PARTITION = 263, KW_PARTITIONED = 264, 
+    KW_PARTITIONS = 265, KW_PATH = 266, KW_PERCENT = 267, KW_PKFK_JOIN = 268, 
+    KW_PLAN = 269, KW_PLANS = 270, KW_PLUS = 271, KW_POOL = 272, KW_PRECEDING = 273, 
+    KW_PRECISION = 274, KW_PREPARE = 275, KW_PRESERVE = 276, KW_PRIMARY = 277, 
+    KW_PRINCIPALS = 278, KW_PROCEDURE = 279, KW_PROTECTION = 280, KW_PURGE = 281, 
+    KW_QUALIFY = 282, KW_QUARTER = 283, KW_QUERY = 284, KW_QUERY_PARALLELISM = 285, 
+    KW_RANGE = 286, KW_READ = 287, KW_READONLY = 288, KW_READS = 289, KW_REAL = 290, 
+    KW_REBUILD = 291, KW_RECORDREADER = 292, KW_RECORDWRITER = 293, KW_REDUCE = 294, 
+    KW_REFERENCES = 295, KW_REGEXP = 296, KW_RELOAD = 297, KW_RELY = 298, 
+    KW_REMOTE = 299, KW_RENAME = 300, KW_REOPTIMIZATION = 301, KW_REPAIR = 302, 
+    KW_REPL = 303, KW_REPLACE = 304, KW_REPLICATION = 305, KW_RESOURCE = 306, 
+    KW_RESPECT = 307, KW_RESTRICT = 308, KW_REVOKE = 309, KW_REWRITE = 310, 
+    KW_RIGHT = 311, KW_RLIKE = 312, KW_ROLE = 313, KW_ROLES = 314, KW_ROLLBACK = 315, 
+    KW_ROLLUP = 316, KW_ROW = 317, KW_ROWS = 318, KW_SCHEDULED = 319, KW_SCHEDULING_POLICY = 320, 
+    KW_SCHEMA = 321, KW_SCHEMAS = 322, KW_SECOND = 323, KW_SELECT = 324, 
+    KW_SEMI = 325, KW_SERDE = 326, KW_SERDEPROPERTIES = 327, KW_SERVER = 328, 
+    KW_SET = 329, KW_SETS = 330, KW_SET_CURRENT_SNAPSHOT = 331, KW_SHARED = 332, 
+    KW_SHOW = 333, KW_SHOW_DATABASE = 334, KW_SKEWED = 335, KW_SNAPSHOT = 336, 
+    KW_SOME = 337, KW_SORT = 338, KW_SORTED = 339, KW_SPEC = 340, KW_SSL = 341, 
+    KW_START = 342, KW_STATISTICS = 343, KW_STATUS = 344, KW_STORED = 345, 
+    KW_STREAMTABLE = 346, KW_STRING = 347, KW_STRUCT = 348, KW_SUMMARY = 349, 
+    KW_SYNC = 350, KW_SYSTEM_TIME = 351, KW_SYSTEM_VERSION = 352, KW_TABLE = 353, 
+    KW_TABLES = 354, KW_TABLESAMPLE = 355, KW_TBLPROPERTIES = 356, KW_TEMPORARY = 357, 
+    KW_TERMINATED = 358, KW_THEN = 359, KW_TIME = 360, KW_TIMESTAMP = 361, 
+    KW_TIMESTAMPLOCALTZ = 362, KW_TIMESTAMPTZ = 363, KW_TO = 364, KW_TOUCH = 365, 
+    KW_TRAILING = 366, KW_TRANSACTION = 367, KW_TRANSACTIONAL = 368, KW_TRANSACTIONS = 369, 
+    KW_TRANSFORM = 370, KW_TRIGGER = 371, KW_TRIM = 372, KW_TRUE = 373, 
+    KW_TRUNCATE = 374, KW_TYPE = 375, KW_UNARCHIVE = 376, KW_UNBOUNDED = 377, 
+    KW_UNDO = 378, KW_UNION = 379, KW_UNIONTYPE = 380, KW_UNIQUE = 381, 
+    KW_UNIQUEJOIN = 382, KW_UNKNOWN = 383, KW_UNLOCK = 384, KW_UNMANAGED = 385, 
+    KW_UNSET = 386, KW_UNSIGNED = 387, KW_UPDATE = 388, KW_URI = 389, KW_URL = 390, 
+    KW_USE = 391, KW_USER = 392, KW_USING = 393, KW_UTC = 394, KW_UTCTIMESTAMP = 395, 
+    KW_VALIDATE = 396, KW_VALUES = 397, KW_VALUE_TYPE = 398, KW_VARCHAR = 399, 
+    KW_VECTORIZATION = 400, KW_VIEW = 401, KW_VIEWS = 402, KW_WAIT = 403, 
+    KW_WEEK = 404, KW_WHEN = 405, KW_WHERE = 406, KW_WHILE = 407, KW_WINDOW = 408, 
+    KW_WITH = 409, KW_WITHIN = 410, KW_WORK = 411, KW_WORKLOAD = 412, KW_WRITE = 413, 
+    KW_YEAR = 414, KW_ZONE = 415, DOT = 416, COLON = 417, COMMA = 418, SEMICOLON = 419, 
+    LPAREN = 420, RPAREN = 421, LSQUARE = 422, RSQUARE = 423, LCURLY = 424, 
+    RCURLY = 425, EQUAL = 426, EQUAL_NS = 427, NOTEQUAL = 428, LESSTHANOREQUALTO = 429, 
+    LESSTHAN = 430, GREATERTHANOREQUALTO = 431, GREATERTHAN = 432, DIVIDE = 433, 
+    PLUS = 434, MINUS = 435, STAR = 436, MOD = 437, DIV = 438, AMPERSAND = 439, 
+    TILDE = 440, BITWISEOR = 441, CONCATENATE = 442, BITWISEXOR = 443, QUESTION = 444, 
+    DOLLAR = 445, CharSetLiteral = 446, IntegralLiteral = 447, NumberLiteral = 448, 
+    ByteLengthLiteral = 449, Number = 450, Identifier = 451, CharSetName = 452, 
+    WHITE_SPACE = 453, LINE_COMMENT = 454, QUERY_HINT = 455, SHOW_HINT = 456, 
+    HIDDEN_HINT = 457
   };
 
   enum {
@@ -149,152 +150,152 @@ public:
     RuleColumnNameTypeConstraint = 86, RuleColType = 87, RuleType = 88, 
     RuleListType = 89, RuleStructType = 90, RuleColumnNameColonTypeList = 91, 
     RuleColumnNameColonType = 92, RuleMapType = 93, RuleUnionType = 94, 
-    RuleColTypeList = 95, RuleColumnConstraint = 96, RuleForeignKeyConstraint = 97, 
-    RuleConstraintOptsCreate = 98, RuleEnableValidateSpecification = 99, 
-    RuleEnableSpecification = 100, RuleValidateSpecification = 101, RuleEnforcedSpecification = 102, 
-    RuleRelySpecification = 103, RuleColConstraint = 104, RuleColumnConstraintType = 105, 
-    RuleDefaultVal = 106, RuleCheckConstraint = 107, RuleTableConstraintType = 108, 
-    RuleCreateTablePartitionColumnSpec = 109, RulePartitionTransformSpec = 110, 
-    RuleColumnNameTransformConstraint = 111, RulePartitionTransformType = 112, 
-    RuleTableRowFormat = 113, RuleRowFormatDelimited = 114, RuleTableRowFormatFieldIdentifier = 115, 
-    RuleTableRowFormatCollItemsIdentifier = 116, RuleTableRowFormatMapKeysIdentifier = 117, 
-    RuleTableRowFormatLinesIdentifier = 118, RuleTableRowNullFormat = 119, 
-    RuleRowFormatSerde = 120, RuleTableProperties = 121, RuleTablePropertiesList = 122, 
-    RuleKeyProperty = 123, RuleTableFileFormat = 124, RuleTablePropertiesPrefixed = 125, 
-    RuleColumnNameTypeOrConstraintList = 126, RuleColumnNameTypeOrConstraint = 127, 
-    RuleTableConstraint = 128, RuleCreateForeignKey = 129, RuleCreateConstraint = 130, 
-    RuleTableLevelConstraint = 131, RulePkUkConstraint = 132, RuleTableComment = 133, 
-    RuleTableBuckets = 134, RuleColumnNameOrderList = 135, RuleColumnNameOrder = 136, 
-    RuleOrderSpecification = 137, RuleTableSkewed = 138, RuleSkewedValueElement = 139, 
-    RuleSkewedColumnValues = 140, RuleSkewedColumnValue = 141, RuleSkewedColumnValuePairList = 142, 
-    RuleSkewedColumnValuePair = 143, RuleStoredAsDirs = 144, RuleSelectStatementWithCTE = 145, 
-    RuleDropTableStatement = 146, RuleTruncateTableStatement = 147, RuleTablePartitionPrefix = 148, 
-    RuleForce = 149, RuleAlterStatement = 150, RuleAlterTableStatementSuffix = 151, 
-    RuleAlterStatementSuffixRename = 152, RuleAlterStatementSuffixDropPartitions = 153, 
-    RulePartitionSelectorSpec = 154, RulePartitionSelectorVal = 155, RulePartitionSelectorOperator = 156, 
-    RuleAlterStatementSuffixAddPartitions = 157, RuleAlterStatementSuffixAddPartitionsElement = 158, 
-    RulePartitionLocation = 159, RuleAlterStatementSuffixTouch = 160, RuleAlterStatementSuffixArchive = 161, 
-    RuleAlterStatementSuffixUnArchive = 162, RuleAlterStatementSuffixProperties = 163, 
-    RuleAlterStatementSuffixSkewedby = 164, RuleAlterStatementSuffixExchangePartition = 165, 
-    RuleAlterStatementPartitionKeyType = 166, RuleColumnNameType = 167, 
-    RuleAlterStatementSuffixDropConstraint = 168, RuleAlterStatementSuffixAddConstraint = 169, 
-    RuleAlterForeignKeyWithName = 170, RuleConstraintOptsAlter = 171, RuleAlterConstraintWithName = 172, 
-    RuleAlterTblPartitionStatementSuffix = 173, RuleAlterStatementSuffixFileFormat = 174, 
-    RuleFileFormat = 175, RuleAlterStatementSuffixLocation = 176, RuleAlterStatementSuffixMergeFiles = 177, 
-    RuleAlterStatementSuffixSerdeProperties = 178, RuleAlterStatementSuffixRenamePart = 179, 
-    RuleAlterStatementSuffixBucketNum = 180, RuleAlterTblPartitionStatementSuffixSkewedLocation = 181, 
-    RuleSkewedLocations = 182, RuleSkewedLocationsList = 183, RuleSkewedLocationMap = 184, 
-    RuleSkewedValueLocationElement = 185, RuleAlterStatementSuffixClusterbySortby = 186, 
-    RuleAlterStatementSuffixCompact = 187, RuleTableImplBuckets = 188, RuleBlocking = 189, 
-    RuleCompactPool = 190, RuleAlterStatementSuffixUpdateStatsCol = 191, 
-    RuleAlterStatementSuffixUpdateStats = 192, RuleAlterStatementSuffixRenameCol = 193, 
-    RuleAlterColumnConstraint = 194, RuleAlterForeignKeyConstraint = 195, 
-    RuleAlterColConstraint = 196, RuleAlterStatementChangeColPosition = 197, 
-    RuleAlterStatementSuffixAddCol = 198, RuleColumnNameTypeList = 199, 
-    RuleAlterStatementSuffixUpdateColumns = 200, RuleAlterStatementSuffixSetOwner = 201, 
-    RulePrincipalName = 202, RulePrincipalIdentifier = 203, RuleAlterStatementSuffixSetPartSpec = 204, 
-    RuleAlterStatementSuffixExecute = 205, RuleAlterViewStatementSuffix = 206, 
-    RuleAlterViewSuffixProperties = 207, RuleAlterMaterializedViewStatementSuffix = 208, 
-    RuleAlterMaterializedViewSuffixRewrite = 209, RuleRewriteEnabled = 210, 
-    RuleRewriteDisabled = 211, RuleAlterMaterializedViewSuffixRebuild = 212, 
-    RuleAlterDatabaseStatementSuffix = 213, RuleAlterDatabaseSuffixProperties = 214, 
-    RuleAlterDatabaseSuffixSetOwner = 215, RuleAlterDatabaseSuffixSetLocation = 216, 
-    RuleAlterDataConnectorStatementSuffix = 217, RuleAlterDataConnectorSuffixProperties = 218, 
-    RuleDcProperties = 219, RuleAlterDataConnectorSuffixSetOwner = 220, 
-    RuleAlterDataConnectorSuffixSetUrl = 221, RuleDescStatement = 222, RuleDescFuncNames = 223, 
-    RuleSysFuncNames = 224, RuleTabPartColTypeExpr = 225, RuleExtColumnName = 226, 
-    RuleShowStatement = 227, RuleShowStmtIdentifier = 228, RuleFrom_in = 229, 
-    RuleShowTablesFilterExpr = 230, RuleShowFunctionIdentifier = 231, RulePartTypeExpr = 232, 
-    RuleTabTypeExpr = 233, RuleCompactionId = 234, RuleCompactionPool = 235, 
-    RuleCompactionType = 236, RuleCompactionStatus = 237, RuleMetastoreCheck = 238, 
-    RuleCreateViewStatement = 239, RuleOrReplace = 240, RuleColumnNameCommentList = 241, 
-    RuleColumnNameComment = 242, RuleViewPartition = 243, RuleCreateMaterializedViewStatement = 244, 
-    RuleViewOrganization = 245, RuleViewClusterSpec = 246, RuleViewComplexSpec = 247, 
-    RuleViewDistSpec = 248, RuleViewSortSpec = 249, RuleCreateScheduledQueryStatement = 250, 
-    RuleScheduleSpec = 251, RuleExecutedAsSpec = 252, RuleDefinedAsSpec = 253, 
-    RuleAlterScheduledQueryStatement = 254, RuleAlterScheduledQueryChange = 255, 
-    RuleDropScheduledQueryStatement = 256, RuleDropViewStatement = 257, 
-    RuleViewName = 258, RuleDropMaterializedViewStatement = 259, RuleCreateFunctionStatement = 260, 
-    RuleResourceList = 261, RuleResource = 262, RuleResourceType = 263, 
-    RuleCreateMacroStatement = 264, RuleDropFunctionStatement = 265, RuleReloadFunctionsStatement = 266, 
-    RuleDropMacroStatement = 267, RuleAnalyzeStatement = 268, RuleLockStatement = 269, 
-    RuleLockMode = 270, RuleUnlockStatement = 271, RuleLockDatabase = 272, 
-    RuleUnlockDatabase = 273, RuleCreateRoleStatement = 274, RuleDropRoleStatement = 275, 
-    RuleGrantPrivileges = 276, RulePrivilegeList = 277, RulePrivlegeDef = 278, 
-    RulePrivilegeType = 279, RulePrivilegeObject = 280, RulePrivObject = 281, 
-    RulePrincipalSpecification = 282, RuleWithGrantOption = 283, RuleRevokePrivileges = 284, 
-    RuleGrantOptionFor = 285, RuleShowGrants = 286, RulePrivilegeIncludeColObject = 287, 
-    RulePrivObjectCols = 288, RuleShowRoleGrants = 289, RuleShowRolePrincipals = 290, 
-    RuleShowRoles = 291, RuleGrantRole = 292, RuleWithAdminOption = 293, 
-    RuleRevokeRole = 294, RuleAdminOptionFor = 295, RuleSetRole = 296, RuleShowCurrentRole = 297, 
-    RuleAbortTransactionStatement = 298, RuleAbortCompactionStatement = 299, 
-    RuleKillQueryStatement = 300, RuleResourcePlanDdlStatements = 301, RuleCreateResourcePlanStatement = 302, 
-    RuleRpAssignList = 303, RuleRpAssign = 304, RulePoolPath = 305, RuleAlterResourcePlanStatement = 306, 
-    RuleRpUnassignList = 307, RuleRpUnassign = 308, RuleActivate = 309, 
-    RuleWithReplace = 310, RuleEnable = 311, RuleDropResourcePlanStatement = 312, 
-    RuleGlobalWmStatement = 313, RuleAlterWmStatement = 314, RuleReplaceResourcePlanStatement = 315, 
-    RuleCreateTriggerStatement = 316, RuleTriggerExpression = 317, RuleTriggerAtomExpression = 318, 
-    RuleComparisionOperator = 319, RuleTriggerLiteral = 320, RuleTriggerActionExpression = 321, 
-    RuleAlterTriggerStatement = 322, RuleDropTriggerStatement = 323, RuleCreatePoolStatement = 324, 
-    RulePoolAssignList = 325, RulePoolAssign = 326, RuleAlterPoolStatement = 327, 
-    RuleDropPoolStatement = 328, RuleCreateMappingStatement = 329, RuleUnmanaged = 330, 
-    RuleAlterMappingStatement = 331, RuleDropMappingStatement = 332, RuleCreateDataConnectorStatement = 333, 
-    RuleDataConnectorType = 334, RuleDataConnectorUrl = 335, RuleDataConnectorComment = 336, 
-    RuleDropDataConnectorStatement = 337, RuleDeleteStatement = 338, RuleUpdateStatement = 339, 
-    RuleSetColumnsClause = 340, RuleColumnAssignmentClause = 341, RulePrecedencePlusExpressionOrDefault = 342, 
-    RuleSqlTransactionStatement = 343, RuleStartTransactionStatement = 344, 
-    RuleTransactionMode = 345, RuleIsolationLevel = 346, RuleLevelOfIsolation = 347, 
-    RuleTransactionAccessMode = 348, RuleCommitStatement = 349, RuleRollbackStatement = 350, 
-    RuleSetAutoCommitStatement = 351, RuleBooleanValueTok = 352, RuleMergeStatement = 353, 
-    RuleWhenClauses = 354, RuleWhenMatchedAndClause = 355, RuleUpdateOrDelete = 356, 
-    RuleWhenMatchedThenClause = 357, RuleWhenNotMatchedClause = 358, RuleValueRowConstructor = 359, 
-    RulePrepareStatement = 360, RuleExecuteStatement = 361, RuleExecuteParamList = 362, 
-    RuleNonReserved = 363, RuleTplsqlPrimitiveType = 364, RuleAdql = 365, 
-    RuleQueryStatementExpression = 366, RuleWithClause = 367, RuleId_ = 368, 
-    RuleAll_distinct = 369, RuleSet_limit = 370, RuleSelectList = 371, RuleTableAllColumns = 372, 
-    RuleExpression = 373, RulePrecedenceOrExpression = 374, RulePrecedenceAndExpression = 375, 
-    RulePrecedenceNotExpression = 376, RulePrecedenceNotOperator = 377, 
-    RulePrecedenceUnarySuffixExpression = 378, RulePrecedenceEqualExpression = 379, 
-    RulePrecedenceSimilarExpression = 380, RulePrecedenceSimilarExpressionMain = 381, 
-    RulePrecedenceBitwiseOrExpression = 382, RulePrecedenceAmpersandExpression = 383, 
-    RulePrecedenceConcatenateExpression = 384, RulePrecedencePlusExpression = 385, 
-    RulePrecedenceStarExpression = 386, RulePrecedenceBitwiseXorExpression = 387, 
-    RulePrecedenceUnaryPrefixExpression = 388, RulePrecedenceUnaryOperator = 389, 
-    RulePrecedenceFieldExpression = 390, RuleAtomExpression = 391, RuleConstant = 392, 
-    RuleIntervalLiteral = 393, RuleIntervalValue = 394, RuleIntervalQualifiers = 395, 
-    RuleDateLiteral = 396, RuleTimestampLiteral = 397, RuleTimestampLocalTZLiteral = 398, 
-    RuleStringLiteralSequence = 399, RuleCharSetStringLiteral = 400, RuleBooleanValue = 401, 
-    RulePrepareStmtParam = 402, RuleParameterIdx = 403, RuleIntervalExpression = 404, 
-    RuleCastExpression = 405, RuleExtractExpression = 406, RuleTimeQualifiers = 407, 
-    RuleFloorExpression = 408, RuleFloorDateQualifiers = 409, RuleCaseExpression = 410, 
-    RuleWhenExpression = 411, RuleSubQueryExpression = 412, RuleFunction_ = 413, 
-    RuleTrimFunction = 414, RuleFunctionName = 415, RuleFunctionIdentifier = 416, 
-    RuleSql11ReservedKeywordsUsedAsFunctionName = 417, RuleSelectExpression = 418, 
-    RuleOrderByClause = 419, RuleColumnRefOrder = 420, RuleOrderSpecificationRewrite = 421, 
-    RuleNullOrdering = 422, RuleNull_treatment = 423, RuleWindow_specification = 424, 
-    RulePartitioningSpec = 425, RulePartitionByClause = 426, RuleExpressions = 427, 
-    RuleExpressionsInParenthesis = 428, RuleExpressionsNotInParenthesis = 429, 
-    RuleExpressionOrDefault = 430, RuleDefaultValue = 431, RuleExpressionPart = 432, 
-    RuleDistributeByClause = 433, RuleSortByClause = 434, RuleColumnRefOrderInParenthesis = 435, 
-    RuleColumnRefOrderNotInParenthesis = 436, RuleClusterByClause = 437, 
-    RuleWindow_frame = 438, RuleWindow_range_expression = 439, RuleWindow_frame_start_boundary = 440, 
-    RuleWindow_frame_boundary = 441, RuleWindow_value_expression = 442, 
-    RuleTableOrColumn = 443, RulePrecedenceBitwiseXorOperator = 444, RulePrecedenceStarOperator = 445, 
-    RulePrecedencePlusOperator = 446, RulePrecedenceConcatenateOperator = 447, 
-    RulePrecedenceAmpersandOperator = 448, RulePrecedenceBitwiseOrOperator = 449, 
-    RulePrecedenceSimilarExpressionPart = 450, RulePrecedenceSimilarOperator = 451, 
-    RulePrecedenceRegexpOperator = 452, RulePrecedenceSimilarExpressionAtom = 453, 
-    RulePrecedenceSimilarExpressionQuantifierPredicate = 454, RuleSubQuerySelectorOperator = 455, 
-    RuleQuantifierType = 456, RulePrecedenceSimilarExpressionPartNot = 457, 
-    RulePrecedenceSimilarExpressionIn = 458, RulePrecedenceEqualOperator = 459, 
-    RulePrecedenceDistinctOperator = 460, RuleIsCondition = 461, RulePrecedenceAndOperator = 462, 
-    RulePrecedenceOrOperator = 463, RuleFromClause = 464, RuleJoinSource = 465, 
-    RuleSubQuerySource = 466, RuleJoinToken = 467, RuleColumnParenthesesList = 468, 
-    RuleColumnNameList = 469, RuleColumnName = 470, RuleWhereClause = 471, 
-    RuleSearchCondition = 472, RuleGroupByClause = 473, RuleGroupByEmpty = 474, 
-    RuleHavingClause = 475, RuleHavingCondition = 476, RuleWindow_clause = 477, 
-    RuleWindow_defn = 478, RuleSetOpSelectStatement = 479, RuleSetOperator = 480, 
-    RuleLimitClause = 481, RuleAdqlPrimitiveType = 482
+    RuleComplexType = 95, RuleColTypeList = 96, RuleColumnConstraint = 97, 
+    RuleForeignKeyConstraint = 98, RuleConstraintOptsCreate = 99, RuleEnableValidateSpecification = 100, 
+    RuleEnableSpecification = 101, RuleValidateSpecification = 102, RuleEnforcedSpecification = 103, 
+    RuleRelySpecification = 104, RuleColConstraint = 105, RuleColumnConstraintType = 106, 
+    RuleDefaultVal = 107, RuleCheckConstraint = 108, RuleTableConstraintType = 109, 
+    RuleCreateTablePartitionColumnSpec = 110, RulePartitionTransformSpec = 111, 
+    RuleColumnNameTransformConstraint = 112, RulePartitionTransformType = 113, 
+    RuleTableRowFormat = 114, RuleRowFormatDelimited = 115, RuleTableRowFormatFieldIdentifier = 116, 
+    RuleTableRowFormatCollItemsIdentifier = 117, RuleTableRowFormatMapKeysIdentifier = 118, 
+    RuleTableRowFormatLinesIdentifier = 119, RuleTableRowNullFormat = 120, 
+    RuleRowFormatSerde = 121, RuleTableProperties = 122, RuleTablePropertiesList = 123, 
+    RuleKeyProperty = 124, RuleTableFileFormat = 125, RuleTablePropertiesPrefixed = 126, 
+    RuleColumnNameTypeOrConstraintList = 127, RuleColumnNameTypeOrConstraint = 128, 
+    RuleTableConstraint = 129, RuleCreateForeignKey = 130, RuleCreateConstraint = 131, 
+    RuleTableLevelConstraint = 132, RulePkUkConstraint = 133, RuleTableComment = 134, 
+    RuleTableBuckets = 135, RuleColumnNameOrderList = 136, RuleColumnNameOrder = 137, 
+    RuleOrderSpecification = 138, RuleTableSkewed = 139, RuleSkewedValueElement = 140, 
+    RuleSkewedColumnValues = 141, RuleSkewedColumnValue = 142, RuleSkewedColumnValuePairList = 143, 
+    RuleSkewedColumnValuePair = 144, RuleStoredAsDirs = 145, RuleSelectStatementWithCTE = 146, 
+    RuleDropTableStatement = 147, RuleTruncateTableStatement = 148, RuleTablePartitionPrefix = 149, 
+    RuleForce = 150, RuleAlterStatement = 151, RuleAlterTableStatementSuffix = 152, 
+    RuleAlterStatementSuffixRename = 153, RuleAlterStatementSuffixDropPartitions = 154, 
+    RulePartitionSelectorSpec = 155, RulePartitionSelectorVal = 156, RulePartitionSelectorOperator = 157, 
+    RuleAlterStatementSuffixAddPartitions = 158, RuleAlterStatementSuffixAddPartitionsElement = 159, 
+    RulePartitionLocation = 160, RuleAlterStatementSuffixTouch = 161, RuleAlterStatementSuffixArchive = 162, 
+    RuleAlterStatementSuffixUnArchive = 163, RuleAlterStatementSuffixProperties = 164, 
+    RuleAlterStatementSuffixSkewedby = 165, RuleAlterStatementSuffixExchangePartition = 166, 
+    RuleAlterStatementPartitionKeyType = 167, RuleColumnNameType = 168, 
+    RuleAlterStatementSuffixDropConstraint = 169, RuleAlterStatementSuffixAddConstraint = 170, 
+    RuleAlterForeignKeyWithName = 171, RuleConstraintOptsAlter = 172, RuleAlterConstraintWithName = 173, 
+    RuleAlterTblPartitionStatementSuffix = 174, RuleAlterStatementSuffixFileFormat = 175, 
+    RuleFileFormat = 176, RuleAlterStatementSuffixLocation = 177, RuleAlterStatementSuffixMergeFiles = 178, 
+    RuleAlterStatementSuffixSerdeProperties = 179, RuleAlterStatementSuffixRenamePart = 180, 
+    RuleAlterStatementSuffixBucketNum = 181, RuleAlterTblPartitionStatementSuffixSkewedLocation = 182, 
+    RuleSkewedLocations = 183, RuleSkewedLocationsList = 184, RuleSkewedLocationMap = 185, 
+    RuleSkewedValueLocationElement = 186, RuleAlterStatementSuffixClusterbySortby = 187, 
+    RuleAlterStatementSuffixCompact = 188, RuleTableImplBuckets = 189, RuleBlocking = 190, 
+    RuleCompactPool = 191, RuleAlterStatementSuffixUpdateStatsCol = 192, 
+    RuleAlterStatementSuffixUpdateStats = 193, RuleAlterStatementSuffixRenameCol = 194, 
+    RuleAlterColumnConstraint = 195, RuleAlterForeignKeyConstraint = 196, 
+    RuleAlterColConstraint = 197, RuleAlterStatementChangeColPosition = 198, 
+    RuleAlterStatementSuffixAddCol = 199, RuleColumnNameTypeList = 200, 
+    RuleAlterStatementSuffixUpdateColumns = 201, RuleAlterStatementSuffixSetOwner = 202, 
+    RulePrincipalName = 203, RulePrincipalIdentifier = 204, RuleAlterStatementSuffixSetPartSpec = 205, 
+    RuleAlterStatementSuffixExecute = 206, RuleAlterViewStatementSuffix = 207, 
+    RuleAlterViewSuffixProperties = 208, RuleAlterMaterializedViewStatementSuffix = 209, 
+    RuleAlterMaterializedViewSuffixRewrite = 210, RuleRewriteEnabled = 211, 
+    RuleRewriteDisabled = 212, RuleAlterMaterializedViewSuffixRebuild = 213, 
+    RuleAlterDatabaseStatementSuffix = 214, RuleAlterDatabaseSuffixProperties = 215, 
+    RuleAlterDatabaseSuffixSetOwner = 216, RuleAlterDatabaseSuffixSetLocation = 217, 
+    RuleAlterDataConnectorStatementSuffix = 218, RuleAlterDataConnectorSuffixProperties = 219, 
+    RuleDcProperties = 220, RuleAlterDataConnectorSuffixSetOwner = 221, 
+    RuleAlterDataConnectorSuffixSetUrl = 222, RuleDescStatement = 223, RuleDescFuncNames = 224, 
+    RuleSysFuncNames = 225, RuleTabPartColTypeExpr = 226, RuleExtColumnName = 227, 
+    RuleShowStatement = 228, RuleShowStmtIdentifier = 229, RuleFrom_in = 230, 
+    RuleShowTablesFilterExpr = 231, RuleShowFunctionIdentifier = 232, RulePartTypeExpr = 233, 
+    RuleTabTypeExpr = 234, RuleCompactionId = 235, RuleCompactionPool = 236, 
+    RuleCompactionType = 237, RuleCompactionStatus = 238, RuleMetastoreCheck = 239, 
+    RuleCreateViewStatement = 240, RuleOrReplace = 241, RuleColumnNameCommentList = 242, 
+    RuleColumnNameComment = 243, RuleViewPartition = 244, RuleCreateMaterializedViewStatement = 245, 
+    RuleViewOrganization = 246, RuleViewClusterSpec = 247, RuleViewComplexSpec = 248, 
+    RuleViewDistSpec = 249, RuleViewSortSpec = 250, RuleCreateScheduledQueryStatement = 251, 
+    RuleScheduleSpec = 252, RuleExecutedAsSpec = 253, RuleDefinedAsSpec = 254, 
+    RuleAlterScheduledQueryStatement = 255, RuleAlterScheduledQueryChange = 256, 
+    RuleDropScheduledQueryStatement = 257, RuleDropViewStatement = 258, 
+    RuleViewName = 259, RuleDropMaterializedViewStatement = 260, RuleCreateFunctionStatement = 261, 
+    RuleResourceList = 262, RuleResource = 263, RuleResourceType = 264, 
+    RuleCreateMacroStatement = 265, RuleDropFunctionStatement = 266, RuleReloadFunctionsStatement = 267, 
+    RuleDropMacroStatement = 268, RuleAnalyzeStatement = 269, RuleLockStatement = 270, 
+    RuleLockMode = 271, RuleUnlockStatement = 272, RuleLockDatabase = 273, 
+    RuleUnlockDatabase = 274, RuleCreateRoleStatement = 275, RuleDropRoleStatement = 276, 
+    RuleGrantPrivileges = 277, RulePrivilegeList = 278, RulePrivlegeDef = 279, 
+    RulePrivilegeType = 280, RulePrivilegeObject = 281, RulePrivObject = 282, 
+    RulePrincipalSpecification = 283, RuleWithGrantOption = 284, RuleRevokePrivileges = 285, 
+    RuleGrantOptionFor = 286, RuleShowGrants = 287, RulePrivilegeIncludeColObject = 288, 
+    RulePrivObjectCols = 289, RuleShowRoleGrants = 290, RuleShowRolePrincipals = 291, 
+    RuleShowRoles = 292, RuleGrantRole = 293, RuleWithAdminOption = 294, 
+    RuleRevokeRole = 295, RuleAdminOptionFor = 296, RuleSetRole = 297, RuleShowCurrentRole = 298, 
+    RuleAbortTransactionStatement = 299, RuleAbortCompactionStatement = 300, 
+    RuleKillQueryStatement = 301, RuleResourcePlanDdlStatements = 302, RuleCreateResourcePlanStatement = 303, 
+    RuleRpAssignList = 304, RuleRpAssign = 305, RulePoolPath = 306, RuleAlterResourcePlanStatement = 307, 
+    RuleRpUnassignList = 308, RuleRpUnassign = 309, RuleActivate = 310, 
+    RuleWithReplace = 311, RuleEnable = 312, RuleDropResourcePlanStatement = 313, 
+    RuleGlobalWmStatement = 314, RuleAlterWmStatement = 315, RuleReplaceResourcePlanStatement = 316, 
+    RuleCreateTriggerStatement = 317, RuleTriggerExpression = 318, RuleTriggerAtomExpression = 319, 
+    RuleComparisionOperator = 320, RuleTriggerLiteral = 321, RuleTriggerActionExpression = 322, 
+    RuleAlterTriggerStatement = 323, RuleDropTriggerStatement = 324, RuleCreatePoolStatement = 325, 
+    RulePoolAssignList = 326, RulePoolAssign = 327, RuleAlterPoolStatement = 328, 
+    RuleDropPoolStatement = 329, RuleCreateMappingStatement = 330, RuleUnmanaged = 331, 
+    RuleAlterMappingStatement = 332, RuleDropMappingStatement = 333, RuleCreateDataConnectorStatement = 334, 
+    RuleDataConnectorType = 335, RuleDataConnectorUrl = 336, RuleDataConnectorComment = 337, 
+    RuleDropDataConnectorStatement = 338, RuleDeleteStatement = 339, RuleUpdateStatement = 340, 
+    RuleSetColumnsClause = 341, RuleColumnAssignmentClause = 342, RulePrecedencePlusExpressionOrDefault = 343, 
+    RuleSqlTransactionStatement = 344, RuleStartTransactionStatement = 345, 
+    RuleTransactionMode = 346, RuleIsolationLevel = 347, RuleLevelOfIsolation = 348, 
+    RuleTransactionAccessMode = 349, RuleCommitStatement = 350, RuleRollbackStatement = 351, 
+    RuleSetAutoCommitStatement = 352, RuleBooleanValueTok = 353, RuleMergeStatement = 354, 
+    RuleWhenClauses = 355, RuleWhenMatchedAndClause = 356, RuleUpdateOrDelete = 357, 
+    RuleWhenMatchedThenClause = 358, RuleWhenNotMatchedClause = 359, RuleValueRowConstructor = 360, 
+    RulePrepareStatement = 361, RuleExecuteStatement = 362, RuleExecuteParamList = 363, 
+    RuleNonReserved = 364, RuleTplsqlPrimitiveType = 365, RuleTplsqlNumericType = 366, 
+    RuleAdql = 367, RuleQueryStatementExpression = 368, RuleWithClause = 369, 
+    RuleId_ = 370, RuleAll_distinct = 371, RuleSet_limit = 372, RuleSelectList = 373, 
+    RuleTableAllColumns = 374, RuleExpression = 375, RulePrecedenceOrExpression = 376, 
+    RulePrecedenceAndExpression = 377, RulePrecedenceNotExpression = 378, 
+    RulePrecedenceNotOperator = 379, RulePrecedenceUnarySuffixExpression = 380, 
+    RulePrecedenceEqualExpression = 381, RulePrecedenceSimilarExpression = 382, 
+    RulePrecedenceSimilarExpressionMain = 383, RulePrecedenceBitwiseOrExpression = 384, 
+    RulePrecedenceAmpersandExpression = 385, RulePrecedenceConcatenateExpression = 386, 
+    RulePrecedencePlusExpression = 387, RulePrecedenceStarExpression = 388, 
+    RulePrecedenceBitwiseXorExpression = 389, RulePrecedenceUnaryPrefixExpression = 390, 
+    RulePrecedenceUnaryOperator = 391, RulePrecedenceFieldExpression = 392, 
+    RuleAtomExpression = 393, RuleConstant = 394, RuleIntervalLiteral = 395, 
+    RuleIntervalValue = 396, RuleIntervalQualifiers = 397, RuleDateLiteral = 398, 
+    RuleTimestampLiteral = 399, RuleTimestampLocalTZLiteral = 400, RuleStringLiteralSequence = 401, 
+    RuleCharSetStringLiteral = 402, RuleBooleanValue = 403, RulePrepareStmtParam = 404, 
+    RuleParameterIdx = 405, RuleIntervalExpression = 406, RuleCastExpression = 407, 
+    RuleExtractExpression = 408, RuleTimeQualifiers = 409, RuleFloorExpression = 410, 
+    RuleFloorDateQualifiers = 411, RuleCaseExpression = 412, RuleWhenExpression = 413, 
+    RuleSubQueryExpression = 414, RuleFunction_ = 415, RuleTrimFunction = 416, 
+    RuleFunctionName = 417, RuleFunctionIdentifier = 418, RuleSql11ReservedKeywordsUsedAsFunctionName = 419, 
+    RuleSelectExpression = 420, RuleOrderByClause = 421, RuleColumnRefOrder = 422, 
+    RuleOrderSpecificationRewrite = 423, RuleNullOrdering = 424, RuleNull_treatment = 425, 
+    RuleWindow_specification = 426, RulePartitioningSpec = 427, RulePartitionByClause = 428, 
+    RuleExpressions = 429, RuleExpressionsInParenthesis = 430, RuleExpressionsNotInParenthesis = 431, 
+    RuleExpressionOrDefault = 432, RuleDefaultValue = 433, RuleExpressionPart = 434, 
+    RuleDistributeByClause = 435, RuleSortByClause = 436, RuleColumnRefOrderInParenthesis = 437, 
+    RuleColumnRefOrderNotInParenthesis = 438, RuleClusterByClause = 439, 
+    RuleWindow_frame = 440, RuleWindow_range_expression = 441, RuleWindow_frame_start_boundary = 442, 
+    RuleWindow_frame_boundary = 443, RuleWindow_value_expression = 444, 
+    RuleTableOrColumn = 445, RulePrecedenceBitwiseXorOperator = 446, RulePrecedenceStarOperator = 447, 
+    RulePrecedencePlusOperator = 448, RulePrecedenceConcatenateOperator = 449, 
+    RulePrecedenceAmpersandOperator = 450, RulePrecedenceBitwiseOrOperator = 451, 
+    RulePrecedenceSimilarExpressionPart = 452, RulePrecedenceSimilarOperator = 453, 
+    RulePrecedenceRegexpOperator = 454, RulePrecedenceSimilarExpressionAtom = 455, 
+    RulePrecedenceSimilarExpressionQuantifierPredicate = 456, RuleSubQuerySelectorOperator = 457, 
+    RuleQuantifierType = 458, RulePrecedenceSimilarExpressionPartNot = 459, 
+    RulePrecedenceSimilarExpressionIn = 460, RulePrecedenceEqualOperator = 461, 
+    RulePrecedenceDistinctOperator = 462, RuleIsCondition = 463, RulePrecedenceAndOperator = 464, 
+    RulePrecedenceOrOperator = 465, RuleFromClause = 466, RuleJoinSource = 467, 
+    RuleSubQuerySource = 468, RuleJoinToken = 469, RuleColumnParenthesesList = 470, 
+    RuleColumnNameList = 471, RuleColumnName = 472, RuleWhereClause = 473, 
+    RuleSearchCondition = 474, RuleGroupByClause = 475, RuleGroupByEmpty = 476, 
+    RuleHavingClause = 477, RuleHavingCondition = 478, RuleWindow_clause = 479, 
+    RuleWindow_defn = 480, RuleSetOpSelectStatement = 481, RuleSetOperator = 482, 
+    RuleLimitClause = 483, RuleAdqlPrimitiveType = 484
   };
 
   explicit TplSqlParser(antlr4::TokenStream *input);
@@ -409,6 +410,7 @@ public:
   class ColumnNameColonTypeContext;
   class MapTypeContext;
   class UnionTypeContext;
+  class ComplexTypeContext;
   class ColTypeListContext;
   class ColumnConstraintContext;
   class ForeignKeyConstraintContext;
@@ -679,6 +681,7 @@ public:
   class ExecuteParamListContext;
   class NonReservedContext;
   class TplsqlPrimitiveTypeContext;
+  class TplsqlNumericTypeContext;
   class AdqlContext;
   class QueryStatementExpressionContext;
   class WithClauseContext;
@@ -2646,6 +2649,7 @@ public:
     StructTypeContext *structType();
     MapTypeContext *mapType();
     UnionTypeContext *unionType();
+    ComplexTypeContext *complexType();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -2770,6 +2774,25 @@ public:
   };
 
   UnionTypeContext* unionType();
+
+  class  ComplexTypeContext : public antlr4::ParserRuleContext {
+  public:
+    ComplexTypeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *KW_COMPLEX();
+    antlr4::tree::TerminalNode *LESSTHAN();
+    TplsqlNumericTypeContext *tplsqlNumericType();
+    antlr4::tree::TerminalNode *GREATERTHAN();
+    antlr4::tree::TerminalNode *KW_QUATERNION();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  ComplexTypeContext* complexType();
 
   class  ColTypeListContext : public antlr4::ParserRuleContext {
   public:
@@ -8300,9 +8323,11 @@ public:
     TplsqlPrimitiveTypeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *KW_TINYINT();
+    antlr4::tree::TerminalNode *KW_UNSIGNED();
     antlr4::tree::TerminalNode *KW_SMALLINT();
     antlr4::tree::TerminalNode *KW_INT();
     antlr4::tree::TerminalNode *KW_BIGINT();
+    antlr4::tree::TerminalNode *KW_INT128();
     antlr4::tree::TerminalNode *KW_INFTYINT();
     antlr4::tree::TerminalNode *KW_BOOLEAN();
     antlr4::tree::TerminalNode *KW_FP4();
@@ -8320,6 +8345,7 @@ public:
     antlr4::tree::TerminalNode *KW_PRECISION();
     antlr4::tree::TerminalNode *KW_FP80();
     antlr4::tree::TerminalNode *KW_FP128();
+    antlr4::tree::TerminalNode *KW_FP256();
     antlr4::tree::TerminalNode *KW_INFTYFLOAT();
     antlr4::tree::TerminalNode *LPAREN();
     antlr4::tree::TerminalNode *RPAREN();
@@ -8358,6 +8384,41 @@ public:
   };
 
   TplsqlPrimitiveTypeContext* tplsqlPrimitiveType();
+
+  class  TplsqlNumericTypeContext : public antlr4::ParserRuleContext {
+  public:
+    antlr4::Token *exponent = nullptr;
+    antlr4::Token *mantissa = nullptr;
+    antlr4::Token *scaleof32 = nullptr;
+    TplsqlNumericTypeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *KW_FLOAT();
+    antlr4::tree::TerminalNode *KW_REAL();
+    antlr4::tree::TerminalNode *KW_DOUBLE();
+    antlr4::tree::TerminalNode *KW_FP64();
+    antlr4::tree::TerminalNode *KW_PRECISION();
+    antlr4::tree::TerminalNode *KW_FP80();
+    antlr4::tree::TerminalNode *KW_FP128();
+    antlr4::tree::TerminalNode *KW_FP256();
+    antlr4::tree::TerminalNode *KW_INFTYFLOAT();
+    antlr4::tree::TerminalNode *LPAREN();
+    antlr4::tree::TerminalNode *RPAREN();
+    std::vector<antlr4::tree::TerminalNode *> Number();
+    antlr4::tree::TerminalNode* Number(size_t i);
+    antlr4::tree::TerminalNode *COMMA();
+    antlr4::tree::TerminalNode *KW_DECIMAL32();
+    antlr4::tree::TerminalNode *KW_DECIMAL64();
+    antlr4::tree::TerminalNode *KW_DECIMAL();
+    antlr4::tree::TerminalNode *KW_INFTYDECIMAL();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  TplsqlNumericTypeContext* tplsqlNumericType();
 
   class  AdqlContext : public antlr4::ParserRuleContext {
   public:

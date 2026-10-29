@@ -395,6 +395,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual std::any visitComplexType(TplSqlParser::ComplexTypeContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual std::any visitColTypeList(TplSqlParser::ColTypeListContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -1472,6 +1476,10 @@ public:
   }
 
   virtual std::any visitTplsqlPrimitiveType(TplSqlParser::TplsqlPrimitiveTypeContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual std::any visitTplsqlNumericType(TplSqlParser::TplsqlNumericTypeContext *ctx) override {
     return visitChildren(ctx);
   }
 

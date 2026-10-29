@@ -299,6 +299,9 @@ public:
   virtual void enterUnionType(TplSqlParser::UnionTypeContext *ctx) = 0;
   virtual void exitUnionType(TplSqlParser::UnionTypeContext *ctx) = 0;
 
+  virtual void enterComplexType(TplSqlParser::ComplexTypeContext *ctx) = 0;
+  virtual void exitComplexType(TplSqlParser::ComplexTypeContext *ctx) = 0;
+
   virtual void enterColTypeList(TplSqlParser::ColTypeListContext *ctx) = 0;
   virtual void exitColTypeList(TplSqlParser::ColTypeListContext *ctx) = 0;
 
@@ -1108,6 +1111,9 @@ public:
 
   virtual void enterTplsqlPrimitiveType(TplSqlParser::TplsqlPrimitiveTypeContext *ctx) = 0;
   virtual void exitTplsqlPrimitiveType(TplSqlParser::TplsqlPrimitiveTypeContext *ctx) = 0;
+
+  virtual void enterTplsqlNumericType(TplSqlParser::TplsqlNumericTypeContext *ctx) = 0;
+  virtual void exitTplsqlNumericType(TplSqlParser::TplsqlNumericTypeContext *ctx) = 0;
 
   virtual void enterAdql(TplSqlParser::AdqlContext *ctx) = 0;
   virtual void exitAdql(TplSqlParser::AdqlContext *ctx) = 0;

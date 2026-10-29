@@ -209,6 +209,8 @@ public:
 
     virtual std::any visitUnionType(TplSqlParser::UnionTypeContext *context) = 0;
 
+    virtual std::any visitComplexType(TplSqlParser::ComplexTypeContext *context) = 0;
+
     virtual std::any visitColTypeList(TplSqlParser::ColTypeListContext *context) = 0;
 
     virtual std::any visitColumnConstraint(TplSqlParser::ColumnConstraintContext *context) = 0;
@@ -748,6 +750,8 @@ public:
     virtual std::any visitNonReserved(TplSqlParser::NonReservedContext *context) = 0;
 
     virtual std::any visitTplsqlPrimitiveType(TplSqlParser::TplsqlPrimitiveTypeContext *context) = 0;
+
+    virtual std::any visitTplsqlNumericType(TplSqlParser::TplsqlNumericTypeContext *context) = 0;
 
     virtual std::any visitAdql(TplSqlParser::AdqlContext *context) = 0;
 

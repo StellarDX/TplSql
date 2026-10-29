@@ -548,6 +548,7 @@ type
     | structType
     | mapType
     | unionType
+    | complexType
     ;
 
 // array<...>
@@ -576,6 +577,13 @@ mapType
 // union<...>
 unionType
     : KW_UNIONTYPE LESSTHAN colTypeList GREATERTHAN
+    ;
+
+// complex<...>
+complexType
+    : KW_COMPLEX LESSTHAN tplsqlNumericType GREATERTHAN
+    | KW_QUATERNION LESSTHAN tplsqlNumericType GREATERTHAN
+    // | KW_HYPERCOMPLEX ... // 功能更强的超复数，但是实现起来过于复杂
     ;
 
 colTypeList
