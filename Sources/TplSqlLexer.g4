@@ -28,6 +28,7 @@ KW_TOP                  : 'TOP';
 KW_NATURAL              : 'NATURAL';
 KW_DLL                  : 'DLL';
 
+KW_BIT                  : 'BIT';
 KW_TINYINT              : 'TINYINT' | 'INT8';
 KW_SMALLINT             : 'SMALLINT' | 'INT16';
 KW_INT                  : 'INT' 'EGER'? | 'INT32';
@@ -54,8 +55,17 @@ KW_DECIMAL64            : 'DECIMAL64';
 KW_DECIMAL              : 'DEC' 'IMAL'? | 'NUMERIC' | 'DECIMAL128';
 KW_INFTYDECIMAL         : 'INFTYDECIMAL';
 
+KW_VARBINARY            : 'VARBINARY';
+
 KW_SEXAGESIMAL          : 'SEXAGESIMAL';
 
+KW_CLOB                 : 'CLOB';
+KW_BLOB                 : 'BLOB';
+
+KW_POINT                : 'POINT';
+KW_CIRCLE               : 'CIRCLE';
+KW_POLYGON              : 'POLYGON';
+KW_REGION               : 'REGION';
 
 StringLiteral: ( '\'' ( ~('\'' | '\\') | ('\\' .))* '\'')+;
 fragment QuotedIdentifier: '"' ( ~('"' | '\\') | ('\\' .))* '"';

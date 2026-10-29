@@ -44,9 +44,11 @@ tplsqlPrimitiveType
     //| KW_INTERVAL KW_DAY KW_TO KW_SECOND
     // 字符串类型
     | KW_STRING
-    | (KW_VARCHAR | KW_CHAR) LPAREN length = Number RPAREN
+    | (KW_VARCHAR | KW_CHAR) (LPAREN length = Number RPAREN)?
     // 原始数据
-    | KW_BINARY
+    | KW_CLOB
+    | KW_BLOB
+    | (KW_BINARY | KW_VARBINARY) (LPAREN length = Number RPAREN)?
     // 十进制浮点
     | KW_DECIMAL32
     | KW_DECIMAL64
@@ -54,4 +56,8 @@ tplsqlPrimitiveType
     | KW_INFTYDECIMAL (LPAREN scaleof32 = Number RPAREN)? // IEEE754标准中无限精度十进制浮点强制对齐到32位的整数倍
     // 六十进制类型
     | KW_SEXAGESIMAL
+    // 几何类型
+    | KW_POINT
+    | KW_CIRCLE
+    | KW_POLYGON
     ;

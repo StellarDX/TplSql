@@ -27,6 +27,14 @@ import HiveLexer;
 KW_TOP                  : 'TOP';
 KW_NATURAL              : 'NATURAL';
 KW_DECIMAL              : 'DECIMAL' | 'NUMERIC';
+KW_BIT                  : 'BIT';
+KW_CLOB                 : 'CLOB';
+KW_VARBINARY            : 'VARBINARY';
+KW_BLOB                 : 'BLOB';
+KW_POINT                : 'POINT';
+KW_CIRCLE               : 'CIRCLE';
+KW_POLYGON              : 'POLYGON';
+KW_REGION               : 'REGION';
 
 StringLiteral: ( '\'' ( ~('\'' | '\\') | ('\\' .))* '\'')+;
 fragment QuotedIdentifier: '"' ( ~('"' | '\\') | ('\\' .))* '"';
