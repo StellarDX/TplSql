@@ -102,7 +102,7 @@ all_distinct
     | KW_DISTINCT
     ;
 
-// <set_limit> ::= TOP <unsigned_decimal> （ADQL支持，TplSql不支持）
+// <set_limit> ::= TOP <unsigned_decimal>
 set_limit
     : KW_TOP num = Number
     ;
