@@ -2,10 +2,6 @@
 
 TplSql是一套基于[ANTLR](https://www.antlr.org/)编写的SQL语法。设计融合Hive SQL、ADQL（Astronomical Data Query Language，IVOA 标准）与自行扩展的类型和语句特性以提供一个较为完整的「可读可写」查询体系：既能做天文数据的检索，也能完成建库建表、写入、更新、删除与事务控制。
 
-- 词法/语法源文件：`Sources/*.g4`
-- C++ 目标生成产物：`Sources/Cpp/`
-- 当然你也可以用它生成别的语言的分析器
-
 ## 设计定位
 
 TplSql继承ADQL的大部分特性，并在此基础上引入Hive语法的特性补全Create、Insert和Delete等语句，因此它总体上基本等同于“加入了ADQL特性和过程化的HiveSQL”。未来还会引入类似MySQL的过程化特性。
