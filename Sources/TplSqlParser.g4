@@ -28,7 +28,7 @@ options
 import TplSqlNonRsvdKwds, TplSqlTypes, ADQLParser;
 
 tplsql
-    : statement SEMICOLON EOF
+    : statement SEMICOLON
     ;
 
 // 顶层语句
