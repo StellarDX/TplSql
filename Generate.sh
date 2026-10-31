@@ -1,4 +1,5 @@
 #!/bin/bash
+# 此脚本由Deepseek-flash生成
 
 ANTLRExec=""
 Languages=("Cpp" "Java" "Python3")
