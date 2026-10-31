@@ -72,6 +72,8 @@ KW_REGION               : 'REGION';
 KW_COMPLEX              : 'COMPLEX';
 KW_QUATERNION           : 'QUAT' 'ERNION'?;
 KW_HYPERCOMPLEX         : 'HYPERCOMPLEX';
+KW_VECTOR               : 'VEC' 'TOR'?;
+KW_MATRIX               : 'MAT' 'RIX'?;
 
 StringLiteral: ( '\'' ( ~('\'' | '\\') | ('\\' .))* '\'')+;
 fragment QuotedIdentifier: '"' ( ~('"' | '\\') | ('\\' .))* '"';

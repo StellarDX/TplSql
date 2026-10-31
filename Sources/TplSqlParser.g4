@@ -27,6 +27,69 @@ options
 // 其定位是一个较为完整的可读写查询体系，未来还会引入类似MySQL的过程化特性
 import TplSqlNonRsvdKwds, TplSqlTypes, ADQLParser;
 
+// ---------------------------------- 数据类型 --------------------------------- //
+
+// 原生类型和UDT支持
+type
+    : tplsqlPrimitiveType
+    | listType
+    | structType
+    | mapType
+    | unionType
+    | complexType
+    | vectorType
+    | matrixType
+    ;
+
+// array<type>
+listType
+    : KW_ARRAY LESSTHAN type GREATERTHAN
+    ;
+
+// struct<A: type, B: type, ...>
+structType
+    : KW_STRUCT LESSTHAN columnNameColonTypeList GREATERTHAN
+    ;
+
+columnNameColonTypeList
+    : columnNameColonType (COMMA columnNameColonType)*
+    ;
+
+columnNameColonType
+    : colName = id_ COLON colType (KW_COMMENT comment = StringLiteral)?
+    ;
+
+// map<key, value>
+mapType
+    : KW_MAP LESSTHAN left = tplsqlPrimitiveType COMMA right = type GREATERTHAN
+    ;
+
+// union<...>
+unionType
+    : KW_UNIONTYPE LESSTHAN colTypeList GREATERTHAN
+    ;
+
+// complex<...>
+complexType
+    : KW_COMPLEX LESSTHAN tplsqlNumericType GREATERTHAN
+    | KW_QUATERNION LESSTHAN tplsqlNumericType GREATERTHAN
+    // | KW_HYPERCOMPLEX ... // 功能更强的超复数，但是实现起来过于复杂
+    ;
+
+// 向量类型，与array不同的是，vector支持直接运算而array不支持，且vector支持定义长度，若不指定长度则为变长向量。
+vectorType
+    : KW_VECTOR LESSTHAN tplsqlNumericType GREATERTHAN (LPAREN length = Number RPAREN)?
+    ;
+
+// 矩阵类型，初始化方式为行在前列在后。
+// 实际实现时可自由选择存储方式，包括但不限于压缩存储，行式存储和列式存储，若不指定行数和列数则为变长矩阵。
+matrixType
+    : KW_MATRIX LESSTHAN tplsqlNumericType GREATERTHAN (LPAREN row = Number COMMA col = Number RPAREN)?
+    ;
+
+// ---------------------------------------------------------------------------- //
+
+// 语法开始
 tplsql
     : statement SEMICOLON
     ;
@@ -539,51 +602,6 @@ columnNameTypeConstraint
 
 colType
     : type
-    ;
-
-// 原生类型和UDT支持
-type
-    : tplsqlPrimitiveType
-    | listType
-    | structType
-    | mapType
-    | unionType
-    | complexType
-    ;
-
-// array<...>
-listType
-    : KW_ARRAY LESSTHAN type GREATERTHAN
-    ;
-
-// struct<A: type, B: type, ...>
-structType
-    : KW_STRUCT LESSTHAN columnNameColonTypeList GREATERTHAN
-    ;
-
-columnNameColonTypeList
-    : columnNameColonType (COMMA columnNameColonType)*
-    ;
-
-columnNameColonType
-    : colName = id_ COLON colType (KW_COMMENT comment = StringLiteral)?
-    ;
-
-// map<key, value>
-mapType
-    : KW_MAP LESSTHAN left = tplsqlPrimitiveType COMMA right = type GREATERTHAN
-    ;
-
-// union<...>
-unionType
-    : KW_UNIONTYPE LESSTHAN colTypeList GREATERTHAN
-    ;
-
-// complex<...>
-complexType
-    : KW_COMPLEX LESSTHAN tplsqlNumericType GREATERTHAN
-    | KW_QUATERNION LESSTHAN tplsqlNumericType GREATERTHAN
-    // | KW_HYPERCOMPLEX ... // 功能更强的超复数，但是实现起来过于复杂
     ;
 
 colTypeList

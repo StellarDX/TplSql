@@ -73,9 +73,9 @@ tplsqlNumericType
     | KW_FP80
     | KW_FP128
     | KW_FP256
-    | KW_INFTYFLOAT (LPAREN (exponent = Number COMMA)? mantissa = Number RPAREN)?
+    //| KW_INFTYFLOAT (LPAREN (exponent = Number COMMA)? mantissa = Number RPAREN)?
     | KW_DECIMAL32
     | KW_DECIMAL64
     | KW_DECIMAL
-    | KW_INFTYDECIMAL (LPAREN scaleof32 = Number RPAREN)?
+    //| KW_INFTYDECIMAL (LPAREN scaleof32 = Number RPAREN)?
     ;
