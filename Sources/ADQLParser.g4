@@ -380,28 +380,6 @@ functionIdentifier
     : id_ (DOT fn = id_)?
     ;
 
-/*
-    The following SQL2011 reserved keywords are used as function name only, but not as identifiers.
-*/
-sql11ReservedKeywordsUsedAsFunctionName
-    : KW_ARRAY
-    | KW_BIGINT
-    | KW_BINARY
-    | KW_BOOLEAN
-    | KW_CURRENT_DATE
-    | KW_CURRENT_TIMESTAMP
-    | KW_DATE
-    | KW_DOUBLE
-    | KW_FLOAT
-    | KW_GROUPING
-    | KW_IF
-    | KW_INT
-    | KW_MAP
-    | KW_REAL
-    | KW_SMALLINT
-    | KW_TIMESTAMP
-    ;
-
 selectExpression
     : tableAllColumns
     | expression

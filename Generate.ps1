@@ -51,3 +51,5 @@ foreach ($i in $Languages) {
     & java -jar $Jar -listener -visitor "-Dlanguage=$i" ./TplSqlLexer.g4 ./TplSqlParser.g4 -o "../Build/$i"
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 }
+
+Set-Location ../

@@ -244,4 +244,60 @@ nonReserved
     | KW_WRITE
     | KW_YEAR
     | KW_ZONE
+    // TplSql添加的类型名
+    | KW_INT128
+    | KW_INFTYINT
+    | KW_FP4
+    | KW_FP6E2M3
+    | KW_FP6E3M2
+    | KW_FP8E4M3
+    | KW_FP8E5M2
+    | KW_FP16
+    | KW_BFP16
+    | KW_TF19
+    | KW_FP80
+    | KW_FP128
+    | KW_FP256
+    | KW_INFTYFLOAT
+    | KW_VARCHAR
+    | KW_CHAR
+    | KW_CLOB
+    | KW_BLOB
+    | KW_VARBINARY
+    | KW_DECIMAL32
+    | KW_DECIMAL64
+    | KW_DECIMAL
+    | KW_INFTYDECIMAL
+    | KW_SEXAGESIMAL
+    | KW_POINT
+    | KW_CIRCLE
+    | KW_POLYGON
+    | KW_STRINGLIST
+    | KW_COMPLEX
+    | KW_QUATERNION
+    | KW_VECTOR
+    | KW_MATRIX
+    ;
+
+/*
+    The following SQL2011 reserved keywords are used as function name only, but not as identifiers.
+*/
+sql11ReservedKeywordsUsedAsFunctionName
+    : KW_ARRAY
+    | KW_BIGINT
+    | KW_BINARY
+    | KW_BOOLEAN
+    | KW_CURRENT_DATE
+    | KW_CURRENT_TIMESTAMP
+    | KW_DATE
+    | KW_DOUBLE
+    | KW_FP64
+    | KW_FLOAT
+    | KW_GROUPING
+    | KW_IF
+    | KW_INT
+    | KW_MAP
+    | KW_REAL
+    | KW_SMALLINT
+    | KW_TIMESTAMP
     ;

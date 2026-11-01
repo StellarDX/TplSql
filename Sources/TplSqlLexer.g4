@@ -69,6 +69,7 @@ KW_CIRCLE               : 'CIRCLE';
 KW_POLYGON              : 'POLYGON';
 KW_REGION               : 'REGION';
 
+KW_STRINGLIST           : 'STRINGLIST';
 KW_COMPLEX              : 'COMPLEX';
 KW_QUATERNION           : 'QUAT' 'ERNION'?;
 KW_HYPERCOMPLEX         : 'HYPERCOMPLEX';

@@ -42,11 +42,13 @@ type
     ;
 
 // array<type>
+// 字符串格式：[a, b, ...]
 listType
     : KW_ARRAY LESSTHAN type GREATERTHAN
     ;
 
 // struct<A: type, B: type, ...>
+// 字符串格式：{"A":..., "B":..., ...}
 structType
     : KW_STRUCT LESSTHAN columnNameColonTypeList GREATERTHAN
     ;
@@ -60,6 +62,7 @@ columnNameColonType
     ;
 
 // map<key, value>
+// 字符串格式：{"A":..., "B":..., ...}
 mapType
     : KW_MAP LESSTHAN left = tplsqlPrimitiveType COMMA right = type GREATERTHAN
     ;

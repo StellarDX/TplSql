@@ -64,3 +64,5 @@ do
     java -jar "$ANTLRExec" -listener -visitor -Dlanguage=$i ./ADQLLexer.g4 ./ADQLParser.g4 -o ../Build/$i
     java -jar "$ANTLRExec" -listener -visitor -Dlanguage=$i ./TplSqlLexer.g4 ./TplSqlParser.g4 -o ../Build/$i
 done
+
+cd ../

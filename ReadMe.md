@@ -71,7 +71,7 @@ ADQLParser.g4                （ADQL解析规则，入口规则adql）
 | 六十进制 | `SEXAGESIMAL`（常用于高精度角度，度/分/秒） |
 | 几何（球面） | `POINT`、`CIRCLE`、`POLYGON`（顶点以测地线连接） |
 | 复数 | `COMPLEX`、`QUATERNION`（可由 `tplsqlNumericType` 构造） |
-| 复合容器 | `ARRAY<>`、`STRUCT<A: T, ...>`、`MAP<K, V>`、`UNION<>` |
+| 复合容器 | `STRINGLIST`、`ARRAY<>`、`STRUCT<A: T, ...>`、`MAP<K, V>`、`UNION<>` |
 | 线性代数 | `VECTOR<>(n)`、`MATRIX<>(r, c)` |
 
 ADQL 侧保留 IVOA 定义的基础类型（`BIT`、`SMALLINT`、`INT`、`BIGINT`、`BOOLEAN`、`FLOAT`、`REAL`、`DOUBLE PRECISION`、时间类型、字符/二进制、`POINT`/`CIRCLE`/`POLYGON` 等）。
