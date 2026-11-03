@@ -4,7 +4,7 @@ TplSql是一套基于[ANTLR](https://www.antlr.org/)编写的SQL语法。设计�
 
 ## 设计定位
 
-TplSql继承ADQL的大部分特性，并在此基础上引入Hive语法的特性补全Create、Insert和Delete等语句，因此它总体上基本等同于“加入了ADQL特性和过程化的HiveSQL”。未来还会引入类似MySQL的过程化特性。
+TplSql继承ADQL的大部分特性，并在此基础上引入Hive语法的特性补全Create、Insert和Delete等语句，因此它总体上基本等同于“加入了ADQL特性和过程化的HiveSQL”。过程化部分基于MySQL扩展。
 
 ## 语法文件的层次结构
 
@@ -26,11 +26,11 @@ ADQLParser.g4                （ADQL解析规则，入口规则adql）
 | --- | --- |
 | `HiveLexer.g4` | 基础词法：保留字/非保留字、字符串、数字、注释等 |
 | `ADQLLexer.g4` | 在`HiveLexer`之上补充ADQL关键字（`CLOB`、`POINT`、`CIRCLE`、`POLYGON`、`REGION`等） |
-| `TplSqlLexer.g4` | 在`HiveLexer`之上补充TplSql类型关键字（`FP4`、`DECIMAL32`、`INT128`、`SEXAGESIMAL`、`QUATERNION`等） |
+| `TplSqlLexer.g4` | 在`HiveLexer`之上补充TplSql类型关键字（`FP4`、`DECIMAL32`、`INT128`、`SEXAGESIMAL`、`QUATERNION`等），以及过程化符号（`RETURN`、`RETURNS`、`BEGIN`、`DECLARE`、`HANDLER`、`LOOP`、`REPEAT`、`UNTIL`、`OPEN`、`CLOSE`、`NEXT`、`CALL`、`DETERMINISTIC`、`FOLLOWS`/`PRECEDES`等）与赋值符`:=` |
 | `ADQLTypes.g4` | ADQL原生类型`adqlPrimitiveType` |
 | `TplSqlTypes.g4` | TplSql原生类型`tplsqlPrimitiveType`、复数可用的数值类型`tplsqlNumericType` |
 | `ADQLParser.g4` | ADQL解析规则，入口`adql : queryStatementExpression SEMICOLON` |
-| `TplSqlParser.g4` | TplSql解析规则，入口`tplsql : statement SEMICOLON` |
+| `TplSqlParser.g4` | TplSql解析规则，入口`tplsql : (statement SEMICOLON)* EOF` |
 
 > 注：需要纯ADQL语义时使用`adql`，需要完整TplSql能力时使用`tplsql`。
 
@@ -41,12 +41,15 @@ ADQLParser.g4                （ADQL解析规则，入口规则adql）
 | 分类 | 语句/规则 |
 | --- | --- |
 | 执行计划 | `EXPLAIN`（`EXTENDED`/`FORMATTED`/`CBO COST`/`AST`/`VECTORIZATION`/`DDL`等选项）、`EXPLAIN REWRITE` |
-| 查询 | `SELECT`、`WITH`（CTE 支持 `WITH t(c1, c2, ...) AS (...)` 的列别名写法）、集合运算、`JOIN`/`UNIQUEJOIN`、`LATERAL VIEW`、`TRANSFORM`、窗口函数、`GROUP BY`/`ROLLUP`/`CUBE`/`GROUPING SETS`、`ORDER BY`/`CLUSTER BY`/`DISTRIBUTE BY`/`SORT BY`/`LIMIT`/`QUALIFY` |
+| 查询 | `SELECT`、`WITH`（CTE 支持 `WITH t(c1, c2, ...) AS (...)` 的列别名写法）、集合运算、`JOIN`/`UNIQUEJOIN`、`LATERAL VIEW`、`TRANSFORM`、窗口函数、`GROUP BY`/`ROLLUP`/`CUBE`/`GROUPING SETS`、`ORDER BY`/`CLUSTER BY`/`DISTRIBUTE BY`/`SORT BY`/`LIMIT`/`QUALIFY`、`SELECT ... INTO`（`atomSelectStatement`中的`intoClause`） |
 | 数据装载 | `LOAD DATA LOCAL INPATH ...`、`EXPORT TABLE ...`、`IMPORT ...` |
 | 库级 DDL | `CREATE/USE/DROP DATABASE`（含注释、位置、属性、连接器） |
 | 表级 DDL | `CREATE TABLE`（含分区、分桶、ROW FORMAT、STORED AS、TBLPROPERTIES、约束、倾斜表）、`CREATE TABLE ... AS SELECT`、`LIKE`、`DROP`、`TRUNCATE`、`ALTER TABLE`（分区、列、属性、位置、文件格式、约束、统计信息等） |
 | 视图与调度 | `CREATE/ALTER/DROP VIEW`、`MATERIALIZED VIEW`、`SCHEDULED QUERY` |
 | 函数与宏 | `CREATE FUNCTION`、`CREATE MACRO`、`DROP/RELOAD FUNCTION`、`DROP MACRO` |
+| 过程与函数（MySQL 过程化） | `CREATE PROCEDURE`（`IN`/`OUT`/`INOUT`参数）、`DROP PROCEDURE`、`ALTER PROCEDURE`、`CREATE FUNCTION ... RETURNS <类型>`、`ALTER FUNCTION`、`CALL`、`SHOW PROCEDURE` |
+| 触发器（MySQL 过程化） | `CREATE TRIGGER ... BEFORE/AFTER INSERT/UPDATE/DELETE ON <表> FOR EACH ROW <语句块>`，可带 `FOLLOWS`/`PRECEDES` |
+| 变量与赋值 | `SET`（`PERSIST`/`PERSIST_ONLY`/`GLOBAL`/`LOCAL`/`SESSION`选项，支持`=`与`:=`） |
 | 统计与锁 | `ANALYZE TABLE`、`LOCK/UNLOCK TABLE`、`LOCK/UNLOCK DATABASE` |
 | 权限 | `CREATE/DROP ROLE`、`GRANT/REVOKE`、`SHOW GRANT`、`SHOW ROLE GRANT`、`SHOW ROLES`、`SHOW PRINCIPALS`、`SET ROLE` |
 | 资源管理 | `RESOURCE PLAN`、`TRIGGER`、`POOL`、`MAPPING`、`DATA CONNECTOR`的创建/修改/删除 |
@@ -55,6 +58,51 @@ ADQLParser.g4                （ADQL解析规则，入口规则adql）
 | 其它 | `PREPARE`、`EXECUTE`（参数化执行）、`KILL QUERY`、`ABORT COMPACTIONS` |
 
 查询子句在TplSql中被显式重写（`TplSqlParser.g4`的ADQL 语法规则覆盖部分），以便同时兼容ADQL与Hive的写法差异。
+
+## 过程化语法
+
+`TplSqlParser.g4`末尾的“过程化”部分大部分来源于MySQL，在已有文法基础上扩展，并尽量避免使用语义谓词，使文法保持为上下文无关文法。由于TplSql不面向带调度能力的数据库，故未加入MySQL的`EVENT`（事件），且暂不支持label相关功能（`labeledBlock`、`labeledControl`、`LEAVE`、`ITERATE`）。事务控制仍沿用标准语句`START TRANSACTION`/`COMMIT`，不使用`BEGIN TRANSACTION`/`END TRANSACTION`。
+
+语句块的组成（`compoundStatement`）：
+
+| 类别 | 规则/写法 |
+| --- | --- |
+| 普通语句 | `simpleStatement`（即`execStatement`） |
+| 返回 | `RETURN <表达式>` |
+| 条件 | `IF ... THEN ... ELSEIF ... THEN ... ELSE ... END IF`（`ifStatement`/`ifBody`/`thenStatement`） |
+| 分支 | `CASE <表达式>? WHEN ... THEN ... (ELSE ...)? END CASE`（`caseStatement`） |
+| 块 | `BEGIN <声明列表>? <语句列表>? END`（`beginEndBlock`） |
+| 循环 | `LOOP ... END LOOP`、`WHILE ... DO ... END WHILE`、`REPEAT ... UNTIL ... END REPEAT` |
+| 游标 | `OPEN <游标>`、`FETCH [NEXT] [FROM] <游标> INTO <变量>[, ...]`、`CLOSE <游标>` |
+
+块内声明（`spDeclaration`，以`DECLARE`开头）：
+
+| 声明 | 写法 |
+| --- | --- |
+| 变量 | `DECLARE <名>[, ...] <类型> [DEFAULT <表达式>]` |
+| 异常处理器 | `DECLARE CONTINUE/EXIT/UNDO HANDLER FOR <条件>[, ...] <语句块>`，条件可为标识符、`SQLWARNING`、`NOT FOUND`、`SQLEXCEPTION` |
+| 游标 | `DECLARE <名> CURSOR FOR <selectStatement>` |
+
+`CREATE PROCEDURE`/`CREATE FUNCTION`的存储体（`storedRoutineBody`）与`CREATE TRIGGER`的触发体均为`compoundStatement`；`CREATE FUNCTION`新增`RETURNS <tplsqlPrimitiveType>`分支，函数与过程的创建选项（`routineCreateOption`）为`COMMENT <字符串>`与`[NOT] DETERMINISTIC`。
+
+```sql
+CREATE PROCEDURE p1(IN a INT, OUT b INT)
+    DETERMINISTIC
+    BEGIN
+        DECLARE c INT DEFAULT 0;
+        DECLARE cur CURSOR FOR SELECT oid FROM basic;
+        OPEN cur;
+        FETCH NEXT FROM cur INTO c;
+        IF c > 0 THEN
+            SET b = c;
+        ELSE
+            SET b = 0;
+        END IF;
+        CLOSE cur;
+    END;
+
+CALL p1(1, 2);
+```
 
 ## 数据类型
 
