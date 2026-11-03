@@ -2375,7 +2375,7 @@ optionValueNoOptionType
     : lvalueVariable (EQUAL | ASSIGN_OPERATOR) setExprOrDefault
     ;
 
-lvalueVariable
+lvalueVariable // 由于@符号被占用了（用作@ai等预处理指令），因此变量名直接写就行，不用加@
     : id_ (DOT id_)? // Check in semantic phase that the first id is not global/local/session/default.
     | KW_DEFAULT DOT id_
     ;
