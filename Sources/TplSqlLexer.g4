@@ -78,3 +78,34 @@ KW_MATRIX               : 'MAT' 'RIX'?;
 
 StringLiteral: ( '\'' ( ~('\'' | '\\') | ('\\' .))* '\'')+;
 fragment QuotedIdentifier: '"' ( ~('"' | '\\') | ('\\' .))* '"';
+
+RETURN_SYMBOL           : 'RETURN';
+RETURNS_SYMBOL          : 'RETURNS';
+ELSEIF_SYMBOL           : 'ELSEIF';
+BEGIN_SYMBOL            : 'BEGIN';
+DECLARE_SYMBOL          : 'DECLARE';
+CONDITION_SYMBOL        : 'CONDITION';
+EXIT_SYMBOL             : 'EXIT';
+HANDLER_SYMBOL          : 'HANDLER';
+SQLWARNING_SYMBOL       : 'SQLWARNING';
+FOUND_SYMBOL            : 'FOUND';
+SQLEXCEPTION_SYMBOL     : 'SQLEXCEPTION';
+LOOP_SYMBOL             : 'LOOP';
+REPEAT_SYMBOL           : 'REPEAT';
+UNTIL_SYMBOL            : 'UNTIL';
+OPEN_SYMBOL             : 'OPEN';
+CLOSE_SYMBOL            : 'CLOSE';
+NEXT_SYMBOL             : 'NEXT';
+DETERMINISTIC_SYMBOL    : 'DETERMINISTIC';
+INOUT_SYMBOL            : 'INOUT';
+EACH_SYMBOL             : 'EACH';
+FOLLOWS_SYMBOL          : 'FOLLOWS';
+PRECEDES_SYMBOL         : 'PRECEDES';
+CALL_SYMBOL             : 'CALL';
+SYSTEM_SYMBOL           : 'SYSTEM';
+PERSIST_SYMBOL          : 'PERSIST';
+PERSIST_ONLY_SYMBOL     : 'PERSIST_ONLY';
+GLOBAL_SYMBOL           : 'KW_GLOBAL';
+SESSION_SYMBOL          : 'SESSION';
+
+ASSIGN_OPERATOR         : ':=';

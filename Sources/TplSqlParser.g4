@@ -94,7 +94,7 @@ matrixType
 
 // 语法开始
 tplsql
-    : statement SEMICOLON
+    : (statement SEMICOLON)* EOF
     ;
 
 // 顶层语句
@@ -150,6 +150,9 @@ execStatement
     | mergeStatement
     | prepareStatement
     | executeStatement
+    // MySQL过程化
+    | callStatement
+    | setStatement
     ;
 
 // ------------------------------ ADQL语法规则覆盖 ------------------------------ //
@@ -265,7 +268,7 @@ selectStatement
     ;
 
 atomSelectStatement
-    : s = selectClause f = fromClause? w = whereClause? g = groupByClause? h = havingClause? win = window_clause? q = qualifyClause?
+    : s = selectClause i = intoClause? f = fromClause? w = whereClause? g = groupByClause? h = havingClause? win = window_clause? q = qualifyClause?
     | LPAREN selectStatement RPAREN
     | valuesSource
     ;
@@ -499,6 +502,11 @@ ddlStatement
     | resourcePlanDdlStatements
     | createDataConnectorStatement
     | dropDataConnectorStatement
+    // MySQL过程化添加
+    | createProcedure
+    | dropProcedure
+    | alterProcedureStatement
+    | alterFunctionStatement
     ;
 
 // create database ...
@@ -1363,6 +1371,7 @@ showStatement
         | showStmtIdentifier
     )?
     | KW_SHOW KW_FUNCTIONS (KW_LIKE showFunctionIdentifier)?
+    | KW_SHOW KW_PROCEDURE (KW_LIKE showFunctionIdentifier)?
     | KW_SHOW KW_PARTITIONS tabName = tableName partitionSpec? whereClause? orderByClause? limitClause?
     | KW_SHOW KW_CREATE (db_schema db_name = id_ | KW_TABLE tabName = tableName)
     | KW_SHOW KW_TABLE KW_EXTENDED (from_in db_name = id_)? KW_LIKE showStmtIdentifier partitionSpec?
@@ -1542,6 +1551,10 @@ createFunctionStatement
     : KW_CREATE temp = KW_TEMPORARY? KW_FUNCTION functionIdentifier KW_AS StringLiteral (
         KW_USING rList = resourceList
     )?
+    // MySQL过程化新分支
+    | KW_CREATE KW_FUNCTION ifNotExists? functionName LPAREN (
+        functionParameter (COMMA functionParameter)*
+    )? RPAREN RETURNS_SYMBOL tplsqlPrimitiveType routineCreateOption* storedRoutineBody
     ;
 
 resourceList
@@ -1858,6 +1871,12 @@ replaceResourcePlanStatement
 // create trigger ...
 createTriggerStatement
     : KW_CREATE KW_TRIGGER rpName = id_ DOT triggerName = id_ KW_WHEN triggerExpression KW_DO triggerActionExpression
+    // MySQL过程化
+    | KW_CREATE KW_TRIGGER ifNotExists? (rpName = id_ DOT)? triggerName = id_ timing = (
+        KW_BEFORE
+        | KW_AFTER
+    ) event = (KW_INSERT | KW_UPDATE | KW_DELETE) KW_ON tableName KW_FOR EACH_SYMBOL KW_ROW
+        triggerFollowsPrecedesClause? compoundStatement
     ;
 
 triggerExpression
@@ -1882,7 +1901,7 @@ triggerActionExpression
     | KW_MOVE KW_TO poolPath
     ;
 
-// alter trigger ...
+// alter trigger ... （MySQL里没有alter trigger这种语句，仅hive的方式创建的trigger才可以alter）
 alterTriggerStatement
     : KW_ALTER KW_TRIGGER rpName = id_ DOT triggerName = id_ (
         KW_WHEN triggerExpression KW_DO triggerActionExpression
@@ -2102,4 +2121,288 @@ executeStatement
 
 executeParamList
     : constant (COMMA constant)*
+    ;
+
+// ---------------------------------------------------------------------------- //
+
+// TplSql过程化的语句大部分来源于MySql，此功能直接在前文的基础上扩展
+// 大部分过程化SQL在解析时都加入了语义谓词，因此它在严格意义上属于上下文有关文法，没法简单使用CFD完整表示出来
+// 而TplSql的设计是要求能够跨语言的，因此会做一些改动让整个文法尽量成为上下文无关文法
+
+// 原本TplSql是想着基于Hive的HplSql改的：
+// 后来发现HplSql中事务开始和结束的语句是begin transaction和end transaction
+// 经查这种写法很可能来源于MSSQL，而end transaction语句完全是为了对称而添加的
+// 而end transaction会和这里的end冲突导致文法变为上下文有关文法，而且它们也不是标准SQL的语句
+// 因此TplSql中沿用标准语句start transaction和commit来控制事务执行
+// 后来的研究发现HplSql的原型很有可能就是MSSQL，而MSSQL包含了大量非标准语句，因此就改成基于MySQL改了
+
+// 组合语句列表，用于存储过程，函数（单开分支）和触发器（单开分支）
+// MySQL中除了上述三样以外还有个事件，因为TplSql不是用于拥有调度能力的数据库的，因此没必要添加它。
+// 另外TplSql暂时不支持label相关的功能
+compoundStatement
+    : simpleStatement
+    | returnStatement
+    | ifStatement
+    | caseStatement
+    // | labeledBlock
+    | unlabeledBlock
+    // | labeledControl
+    | unlabeledControl
+    //| leaveStatement
+    //| iterateStatement
+    | cursorOpen
+    | cursorFetch
+    | cursorClose
+    ;
+
+// 语句
+simpleStatement
+    : execStatement
+    ;
+
+// return ...
+returnStatement
+    : RETURN_SYMBOL expression
+    ;
+
+// if ... then ... elseif ... then ... else ... end if
+ifStatement
+    : KW_IF ifBody KW_END KW_IF
+    ;
+
+ifBody
+    : expression thenStatement (ELSEIF_SYMBOL ifBody | KW_ELSE compoundStatementList)?
+    ;
+
+thenStatement
+    : KW_THEN compoundStatementList
+    ;
+
+compoundStatementList
+    : (compoundStatement SEMICOLON)+
+    ;
+
+// case ... when ... then ... else ... end case
+caseStatement
+    : KW_CASE expression? (KW_WHEN expression thenStatement)+ elseStatement? KW_END KW_CASE
+    ;
+
+elseStatement
+    : KW_ELSE compoundStatementList
+    ;
+
+unlabeledBlock
+    : beginEndBlock
+    ;
+
+beginEndBlock
+    : BEGIN_SYMBOL spDeclarations? compoundStatementList? KW_END
+    ;
+
+spDeclarations
+    : (spDeclaration SEMICOLON)+
+    ;
+
+spDeclaration
+    : variableDeclaration
+    //| conditionDeclaration
+    | handlerDeclaration
+    | cursorDeclaration
+    ;
+
+// declare ...
+variableDeclaration
+    : DECLARE_SYMBOL id_ (COMMA id_)* tplsqlPrimitiveType (KW_DEFAULT expression)?
+    ;
+
+// declare ... handler for ...
+handlerDeclaration
+    : DECLARE_SYMBOL (KW_CONTINUE | EXIT_SYMBOL | KW_UNDO) HANDLER_SYMBOL KW_FOR handlerCondition (
+        COMMA handlerCondition
+    )* compoundStatement
+    ;
+
+handlerCondition
+    // : spCondition
+    : id_
+    | SQLWARNING_SYMBOL
+    | KW_NOT FOUND_SYMBOL
+    | SQLEXCEPTION_SYMBOL
+    ;
+
+// declare ... cursor for ...
+cursorDeclaration
+    : DECLARE_SYMBOL id_ KW_CURSOR KW_FOR selectStatement
+    ;
+
+// 循环语句
+unlabeledControl
+    : loopBlock
+    | whileDoBlock
+    | repeatUntilBlock
+    ;
+
+// loop ... end loop
+loopBlock
+    : LOOP_SYMBOL compoundStatementList KW_END LOOP_SYMBOL
+    ;
+
+// while ... do ... end while
+whileDoBlock
+    : KW_WHILE expression KW_DO compoundStatementList KW_END KW_WHILE
+    ;
+
+// repeat ... until ... end repeat
+repeatUntilBlock
+    : REPEAT_SYMBOL compoundStatementList UNTIL_SYMBOL expression KW_END REPEAT_SYMBOL
+    ;
+
+// open ...
+cursorOpen
+    : OPEN_SYMBOL id_
+    ;
+
+// close ...
+cursorClose
+    : CLOSE_SYMBOL id_
+    ;
+
+// fetch ... into ...
+cursorFetch
+    : KW_FETCH (NEXT_SYMBOL? KW_FROM)? id_ KW_INTO id_ (COMMA id_)*
+    ;
+
+// create function新分支
+functionParameter
+    : id_ tplsqlPrimitiveType
+    ;
+
+routineCreateOption
+    : routineOption
+    | KW_NOT? DETERMINISTIC_SYMBOL // 这个是用来判断函数执行结果是不是确定的
+    ;
+
+routineOption
+    : option = KW_COMMENT StringLiteral
+    // | option = LANGUAGE_SYMBOL (
+    //     SQL_SYMBOL
+    //     | id_
+    // )
+    // | option = NO_SYMBOL SQL_SYMBOL
+    // | option = CONTAINS_SYMBOL SQL_SYMBOL
+    // | option = READS_SYMBOL SQL_SYMBOL DATA_SYMBOL
+    // | option = MODIFIES_SYMBOL SQL_SYMBOL DATA_SYMBOL
+    // | option = SQL_SYMBOL SECURITY_SYMBOL security = (
+    //     DEFINER_SYMBOL
+    //     | INVOKER_SYMBOL
+    // )
+    ;
+
+storedRoutineBody
+    : compoundStatement
+    // | {this.isStoredRoutineBody()}? AS_SYMBOL routineString
+    ;
+
+// create procedure
+createProcedure
+    : KW_CREATE KW_PROCEDURE ifNotExists? procedureName LPAREN (
+        procedureParameter (COMMA procedureParameter)*
+    )? RPAREN routineCreateOption* storedRoutineBody
+    ;
+
+procedureName
+    : functionIdentifier // Keyword IF is also a function name
+    | sql11ReservedKeywordsUsedAsFunctionName
+    ;
+
+procedureParameter
+    : type_ = (KW_IN | KW_OUT | INOUT_SYMBOL)? functionParameter
+    ;
+
+// drop procedure
+dropProcedure
+    : KW_DROP KW_PROCEDURE ifExists? procedureRef
+    ;
+
+procedureRef
+    : functionIdentifier // Keyword IF is also a function name
+    | sql11ReservedKeywordsUsedAsFunctionName
+    ;
+
+// create trigger新分支
+triggerFollowsPrecedesClause
+    : ordering = (FOLLOWS_SYMBOL | PRECEDES_SYMBOL) textOrIdentifier // not a trigger reference!
+    ;
+
+textOrIdentifier
+    : id_
+    | StringLiteral
+    ;
+
+// alter procedure/function （只有过程化创建的procrdure和function支持alter）
+alterProcedureStatement
+    : KW_ALTER KW_PROCEDURE procedureRef routineAlterOptions?
+    ;
+
+alterFunctionStatement
+    : KW_ALTER KW_FUNCTION functionName routineAlterOptions?
+    ;
+
+routineAlterOptions
+    : routineCreateOption+
+    ;
+
+// call ...
+callStatement
+    : CALL_SYMBOL procedureRef (LPAREN expressionList? RPAREN)?
+    ;
+
+// select ... into ...
+intoClause
+    : KW_INTO textOrIdentifier (COMMA textOrIdentifier)*
+    ;
+
+// set ... = ...
+setStatement
+    : KW_SET startOptionValueList
+    ;
+
+startOptionValueList
+    : optionValueNoOptionType optionValueListContinued
+    ;
+
+optionValueNoOptionType
+    : lvalueVariable (EQUAL | ASSIGN_OPERATOR) setExprOrDefault
+    ;
+
+lvalueVariable
+    : id_ (DOT id_)? // Check in semantic phase that the first id is not global/local/session/default.
+    | KW_DEFAULT DOT id_
+    ;
+
+setExprOrDefault
+    : expression
+    | KW_DEFAULT
+    | KW_ON
+    | KW_ALL
+    | KW_BINARY
+    | KW_ROW
+    | SYSTEM_SYMBOL
+    ;
+
+optionValueListContinued
+    : (COMMA optionValue)*
+    ;
+
+optionValue
+    : optionType lvalueVariable EQUAL setExprOrDefault
+    | optionValueNoOptionType
+    ;
+
+optionType
+    : PERSIST_SYMBOL
+    | PERSIST_ONLY_SYMBOL
+    | GLOBAL_SYMBOL
+    | KW_LOCAL
+    | SESSION_SYMBOL
     ;
